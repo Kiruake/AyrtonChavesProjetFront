@@ -19,9 +19,10 @@ defineProps<{
 <style lang="scss">
 .button {
     background: $primaryColor;
-    color: $white;
-    padding: rem(16px) rem(32px);
-    border-radius: rem(48px);
+    color: $gray800;
+    font-family: $fontTextFamily;
+    padding: rem(8px) rem(36px);
+    border-radius: rem(12px);
     border: 1px solid $primaryColor;
     text-decoration: none;
     cursor: pointer;
@@ -51,6 +52,10 @@ defineProps<{
         border-color: $gray100;
         color: $gray400;
         cursor: not-allowed;
+    }
+
+    &.-connexion {
+       margin-top: 60px;
     }
 
     &.-small {
