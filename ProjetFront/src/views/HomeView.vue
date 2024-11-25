@@ -7,9 +7,12 @@ import MyForm from '../components/Form.vue'
 
 <template>
   <main>
-  <video class="video" autoplay loop muted>
+
+  <div class="homepage">
+  <video class="homepage__video" autoplay loop muted>
     <source  src="/public/videos/video_login.mp4" type="video/mp4">
   </video>
+  </div>
 
 <MyForm/>
 
@@ -17,18 +20,21 @@ import MyForm from '../components/Form.vue'
   </main>
 </template>
 
-<style lang="css">
+<style lang="scss">
 
-.video {
+.homepage {
+  display: block;
+
+&__video {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   display: block;
-  position: fixed; /* Remplacé relative par fixed pour un fond en plein écran */
+  position: fixed; 
   top: 0;
   left: 0;
-  z-index: -1; /* Place la vidéo en arrière-plan */
+  z-index: -1; 
 }
 
-
+}
 </style>

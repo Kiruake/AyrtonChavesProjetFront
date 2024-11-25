@@ -21,6 +21,7 @@ defineProps<{
     background: $primaryColor;
     color: $gray800;
     font-family: $fontTextFamily;
+    font-weight: 700px;
     padding: rem(8px) rem(36px);
     border-radius: rem(12px);
     border: 1px solid $primaryColor;

@@ -20,6 +20,7 @@ defineProps({
 
 <template>
   <section class="login">
+    <img src="/public/images/LogoTracker.svg" alt="Logo" class="login__logo">
     <h2 v-if="showTitle" class="login__title">Connexion</h2>
     <div class="login__field">
       <input 
@@ -55,10 +56,15 @@ defineProps({
     left: 50%;
     transform: translate(-50%, -50%);
 
+    &__logo {
+    text-align: center;
+    width: 90%;
+  }
+
   &__title {
     font-size: 2.3rem;
     margin-bottom: 60px;
-    color: #F4BB46;
+    color: #FFED23;
     font-family: $fontTextFamily;
   }
 
