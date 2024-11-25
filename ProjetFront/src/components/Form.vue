@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import Button from './Button.vue'
+import MyButton from './Button.vue'
 
 defineProps({
   showTitle: {
@@ -15,13 +15,18 @@ defineProps({
     type: String,
     default: 'Mot de passe',
   },
+  title: {
+    type: String,
+  },
 });
+
+
 </script>
 
 <template>
   <section class="login">
     <img src="/public/images/LogoTracker.svg" alt="Logo" class="login__logo">
-    <h2 v-if="showTitle" class="login__title">Connexion</h2>
+    <h2 v-if="showTitle" class="login__title">{{title}}</h2>
     <div class="login__field">
       <input 
         type="text" 
@@ -39,7 +44,7 @@ defineProps({
       />
     </div>
     <div class="login__actions">
-      <Button class="button -connexion">Se connecter</Button>
+      <MyButton class="button -connexion" :label="'se connecter'"/>
     </div>
   </section>
 </template>

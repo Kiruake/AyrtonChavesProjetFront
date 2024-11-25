@@ -2,6 +2,7 @@
 defineProps<{
     disabled?: boolean;
     variant?: "primary" | "outline" ;
+    label?: string
 }>();
 
 </script>
@@ -12,7 +13,7 @@ defineProps<{
         '-outline': variant === 'outline',
         '-disabled': disabled
     }">
-        <slot></slot>
+        {{label}}
     </button>
 </template>
 

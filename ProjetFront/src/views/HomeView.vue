@@ -14,7 +14,7 @@ import MyForm from '../components/Form.vue'
   </video>
   </div>
 
-<MyForm/>
+<MyForm :title="'Connexion'"/>
 
 
   </main>
