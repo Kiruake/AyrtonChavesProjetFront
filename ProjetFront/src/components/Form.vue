@@ -47,13 +47,16 @@ defineProps({
 <style lang="scss">
 
 .login {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
+
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
   &__title {
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     margin-bottom: 60px;
     color: #F4BB46;
     font-family: $fontTextFamily;
