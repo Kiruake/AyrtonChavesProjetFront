@@ -14,7 +14,6 @@ const props = defineProps({
 
 const emit = defineEmits(['add']);
 
-// Copie locale réactive des variantes pour éviter de modifier les `props`
 const localVariants = ref([...props.variants]);
 
 const updateIcon = (index: number, event: Event) => {
