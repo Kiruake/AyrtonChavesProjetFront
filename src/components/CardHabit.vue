@@ -25,7 +25,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
 <template>
   <div v-for="(variant, index) in variants" :key="index" class="card-habit">
     <!-- Icône dynamique -->
-    <div class="card-habit__icon" contenteditable="true">{{ variant.icon }}</div>
+    <div class="card-habit__icon" contenteditable="true">{{ props.variants[index].icon || variant.icon }}</div>
     <!-- Titre dynamique -->
     <div class="card-habit__title" contenteditable="true">{{ variant.title }}</div>
     <!-- Bouton + -->
