@@ -17,7 +17,6 @@ import CardHabit from '../components/CardHabit.vue'
 
 <MyForm :title="'Connexion'"/>
 
-<CardHabit/>
   </main>
 </template>
 
