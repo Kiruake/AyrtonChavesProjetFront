@@ -24,21 +24,21 @@ const storyOptions: Omit<Story, 'args'> = {
     setup() {
       return { args }
     },
-    template: `<Button v-bind="args">${args.default}</Button>`,
+    template: `<Button v-bind="args" />`,
   }),
 }
 
 export const Primary: Story = {
   ...storyOptions,
   args: {
-    default: 'Button',
+    label: 'Button',
   },
 }
 
 export const DisabledPrimary: Story = {
   ...storyOptions,
   args: {
-    default: 'Submit',
+    label: 'Submit',
     variant: 'primary',
     disabled: true,
   },
@@ -47,7 +47,7 @@ export const DisabledPrimary: Story = {
 export const Outline: Story = {
   ...storyOptions,
   args: {
-    default: 'Connexion',
+    label: 'Connexion',
     variant: 'outline',
   },
 }
@@ -55,7 +55,7 @@ export const Outline: Story = {
 export const OutlineDisabled: Story = {
   ...storyOptions,
   args: {
-    default: 'Submit',
+    label: 'Submit',
     variant: 'outline',
     disabled: true,
   },

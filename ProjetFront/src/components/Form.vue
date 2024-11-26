@@ -1,25 +1,25 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import MyButton from './Button.vue';
-import { useRouter, useRoute } from 'vue-router';
-
-const router = useRouter();
-const route = useRoute();
+import { useRoute } from 'vue-router';
 
 
+const route = useRoute(); // Récupère la route actuelle
+
+// Déterminer si la vue active est SignUpView
 const isSignUpView = computed(() => route.path === '/signup'); 
 
 
-const handleButtonClick = () => {
-  if (isSignUpView.value) {
-    router.push('/'); 
-  } else {
-    router.push('/signup'); 
-  }
-};
-
-
+// Texte du bouton principal
 const buttonLabel = computed(() => (isSignUpView.value ? 'S’inscrire' : 'Se connecter'));
+
+// Texte pour l'action alternative
+const alternateActionText = computed(() =>
+  isSignUpView.value
+    ? "Vous avez déjà un compte ? Se connecter"
+    : "Vous n’avez pas de compte ? S’inscrire"
+);
+
 
 
 defineProps({
@@ -40,7 +40,6 @@ defineProps({
   },
 });
 </script>
-
 
 <template>
   <section class="login">
@@ -66,14 +65,17 @@ defineProps({
       <MyButton
         class="button -connexion"
         :label="buttonLabel"
-        @click="handleButtonClick"
       />
+      <!-- Texte adaptatif sous le bouton -->
+      <p class="login__alternate-action">
+        {{ alternateActionText }}
+      </p>
     </div>
   </section>
 </template>
 
-
 <style lang="scss">
+
 .login {
   width: 300px;
   text-align: center;
@@ -93,7 +95,7 @@ defineProps({
     color: #FFED23;
     font-family: $fontTextFamily;
   }
-  
+
   &__field {
     margin-bottom: 15px;
   }
@@ -118,5 +120,25 @@ defineProps({
       outline: none;
     }
   }
+
+  &__actions {
+    margin-top: 20px;
+
+    .login__alternate-action {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: $gray800;
+      font-family: $fontTextFamily;
+      cursor: pointer;
+      font-weight: 700;
+      text-decoration: underline;
+
+      &:hover {
+        color: #FFED23;
+      }
+    }
+  }
 }
+
+
 </style>
