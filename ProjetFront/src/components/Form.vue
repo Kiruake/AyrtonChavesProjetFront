@@ -1,6 +1,26 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
+import MyButton from './Button.vue';
+import { useRouter, useRoute } from 'vue-router';
 
-import MyButton from './Button.vue'
+const router = useRouter();
+const route = useRoute();
+
+
+const isSignUpView = computed(() => route.path === '/signup'); 
+
+
+const handleButtonClick = () => {
+  if (isSignUpView.value) {
+    router.push('/'); 
+  } else {
+    router.push('/signup'); 
+  }
+};
+
+
+const buttonLabel = computed(() => (isSignUpView.value ? 'S’inscrire' : 'Se connecter'));
+
 
 defineProps({
   showTitle: {
@@ -19,49 +39,50 @@ defineProps({
     type: String,
   },
 });
-
-
 </script>
+
 
 <template>
   <section class="login">
-    <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo">
-    <h2 v-if="showTitle" class="login__title">{{title}}</h2>
+    <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo" />
+    <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
     <div class="login__field">
-      <input 
-        type="text" 
-        class="login__input login__input--text" 
-        :placeholder="usernamePlaceholder" 
-        aria-label="Nom d’utilisateur" 
+      <input
+        type="text"
+        class="login__input login__input--text"
+        :placeholder="usernamePlaceholder"
+        aria-label="Nom d’utilisateur"
       />
     </div>
     <div class="login__field">
-      <input 
-        type="password" 
-        class="login__input login__input--password" 
-        :placeholder="passwordPlaceholder" 
-        aria-label="Mot de passe" 
+      <input
+        type="password"
+        class="login__input login__input--password"
+        :placeholder="passwordPlaceholder"
+        aria-label="Mot de passe"
       />
     </div>
     <div class="login__actions">
-      <MyButton class="button -connexion" :label="'se connecter'"/>
+      <MyButton
+        class="button -connexion"
+        :label="buttonLabel"
+        @click="handleButtonClick"
+      />
     </div>
   </section>
 </template>
 
 
 <style lang="scss">
-
 .login {
+  width: 300px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    width: 300px;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    &__logo {
+  &__logo {
     text-align: center;
     width: 90%;
   }
@@ -72,8 +93,7 @@ defineProps({
     color: #FFED23;
     font-family: $fontTextFamily;
   }
-
- 
+  
   &__field {
     margin-bottom: 15px;
   }
@@ -98,6 +118,5 @@ defineProps({
       outline: none;
     }
   }
-
 }
 </style>
