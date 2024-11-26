@@ -1,6 +1,26 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
+import MyButton from './Button.vue';
+import { useRouter, useRoute } from 'vue-router';
 
-import Button from './Button.vue'
+const router = useRouter();
+const route = useRoute();
+
+
+const isSignUpView = computed(() => route.path === '/signup'); 
+
+
+const handleButtonClick = () => {
+  if (isSignUpView.value) {
+    router.push('/'); 
+  } else {
+    router.push('/signup'); 
+  }
+};
+
+
+const buttonLabel = computed(() => (isSignUpView.value ? 'S’inscrire' : 'Se connecter'));
+
 
 defineProps({
   showTitle: {
@@ -15,51 +35,65 @@ defineProps({
     type: String,
     default: 'Mot de passe',
   },
+  title: {
+    type: String,
+  },
 });
 </script>
 
+
 <template>
   <section class="login">
-    <h2 v-if="showTitle" class="login__title">Connexion</h2>
+    <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo" />
+    <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
     <div class="login__field">
-      <input 
-        type="text" 
-        class="login__input login__input--text" 
-        :placeholder="usernamePlaceholder" 
-        aria-label="Nom d’utilisateur" 
+      <input
+        type="text"
+        class="login__input login__input--text"
+        :placeholder="usernamePlaceholder"
+        aria-label="Nom d’utilisateur"
       />
     </div>
     <div class="login__field">
-      <input 
-        type="password" 
-        class="login__input login__input--password" 
-        :placeholder="passwordPlaceholder" 
-        aria-label="Mot de passe" 
+      <input
+        type="password"
+        class="login__input login__input--password"
+        :placeholder="passwordPlaceholder"
+        aria-label="Mot de passe"
       />
     </div>
     <div class="login__actions">
-      <Button class="button -connexion">Se connecter</Button>
+      <MyButton
+        class="button -connexion"
+        :label="buttonLabel"
+        @click="handleButtonClick"
+      />
     </div>
   </section>
 </template>
 
 
 <style lang="scss">
-
 .login {
   width: 300px;
-  margin: 0 auto;
-  padding: 20px;
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  &__title {
-    font-size: 1.5rem;
-    margin-bottom: 60px;
-    color: #F4BB46;
-    font-family: $fontTextFamily;
+  &__logo {
+    text-align: center;
+    width: 90%;
   }
 
- 
+  &__title {
+    font-size: 2.3rem;
+    margin-bottom: 60px;
+    color: #FFED23;
+    font-family: $fontTextFamily;
+  }
+  
   &__field {
     margin-bottom: 15px;
   }
@@ -84,6 +118,5 @@ defineProps({
       outline: none;
     }
   }
-
 }
 </style>

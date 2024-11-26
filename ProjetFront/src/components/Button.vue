@@ -2,6 +2,7 @@
 defineProps<{
     disabled?: boolean;
     variant?: "primary" | "outline" ;
+    label?: string
 }>();
 
 </script>
@@ -12,7 +13,7 @@ defineProps<{
         '-outline': variant === 'outline',
         '-disabled': disabled
     }">
-        <slot></slot>
+        {{label}}
     </button>
 </template>
 
@@ -21,6 +22,7 @@ defineProps<{
     background: $primaryColor;
     color: $gray800;
     font-family: $fontTextFamily;
+    font-weight: 700px;
     padding: rem(8px) rem(36px);
     border-radius: rem(12px);
     border: 1px solid $primaryColor;
