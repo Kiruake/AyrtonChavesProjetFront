@@ -10,7 +10,7 @@ import MyForm from '../components/Form.vue'
 
   <div class="homepage">
   <video class="homepage__video" autoplay loop muted>
-    <source  src="/public/videos/video_login.mp4" type="video/mp4">
+    <source  src="/videos/video_login.mp4" type="video/mp4">
   </video>
   </div>
 
