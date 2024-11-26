@@ -39,7 +39,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #090A0A;
+  background-color: #FFED23;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
@@ -62,7 +62,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
 .card-habit__title {
   flex-grow: 1;
   font-size: 1.2rem;
-  color: whitesmoke;
+  color: #1D1D1F;
   font-weight: 500;
   margin-left:10px;
   text-align: left;
@@ -78,7 +78,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
 .card-habit__button {
   font-size: 1rem; /* Taille réduite */
   color: white;
-  background-color: #f7c21e; /* Jaune */
+  background-color: #1D1D1F; /* Jaune */
   border: none;
   border-radius: 50%;
   width: 28px; /* Plus petit */
