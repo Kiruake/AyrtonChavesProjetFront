@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: 20
 
+      - name: go to directory
+        run: cd AyrtonChavesProjetFront
+
+
       - name: Install dependencies
         run: npm install
 
