@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import MyForm from '../components/Form.vue'
-
+import CardHabit from '../components/CardHabit.vue'
 
 
 </script>
@@ -17,7 +17,7 @@ import MyForm from '../components/Form.vue'
 
 <MyForm :title="'Connexion'"/>
 
-
+<CardHabit/>
   </main>
 </template>
 
