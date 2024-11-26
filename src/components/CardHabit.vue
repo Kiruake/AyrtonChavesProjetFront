@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 
-// Props pour passer des variantes
 const props = defineProps({
   variants: {
     type: Array as () => { icon: string; title: string }[],
@@ -13,23 +12,42 @@ const props = defineProps({
   },
 });
 
-// Émissions
 const emit = defineEmits(['add']);
 
-// Méthode pour gérer les clics sur le bouton +
-const onAddClick = (variant: { icon: string; title: string }) => {
-  emit('add', variant); // Emit la variante actuelle
+const localVariants = ref([...props.variants]);
+
+const updateIcon = (index: number, event: Event) => {
+  const target = event.target as HTMLDivElement;
+  localVariants.value[index].icon = target.innerText;
+};
+
+const updateTitle = (index: number, event: Event) => {
+  const target = event.target as HTMLDivElement;
+  localVariants.value[index].title = target.innerText;
+};
+
+const onAddClick = (index: number) => {
+  emit('add', localVariants.value[index]);
 };
 </script>
 
 <template>
-  <div v-for="(variant, index) in variants" :key="index" class="card-habit">
-    <!-- Icône dynamique -->
-    <div class="card-habit__icon" contenteditable="true">{{ props.variants[index].icon || variant.icon }}</div>
-    <!-- Titre dynamique -->
-    <div class="card-habit__title" contenteditable="true">{{ variant.title }}</div>
-    <!-- Bouton + -->
-    <button class="card-habit__button" @click="onAddClick(variant)">+</button>
+  <div v-for="(variant, index) in localVariants" :key="index" class="card-habit">
+    <div
+      class="card-habit__icon"
+      contenteditable="true"
+      @input="updateIcon(index, $event)"
+    >
+      {{ variant.icon }}
+    </div>
+    <div
+      class="card-habit__title"
+      contenteditable="true"
+      @input="updateTitle(index, $event)"
+    >
+      {{ variant.title }}
+    </div>
+    <button class="card-habit__button" @click="onAddClick(index)">+</button>
   </div>
 </template>
 
@@ -39,7 +57,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #090A0A;
+  background-color: #FFED23;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
@@ -62,7 +80,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
 .card-habit__title {
   flex-grow: 1;
   font-size: 1.2rem;
-  color: whitesmoke;
+  color: #1D1D1F;
   font-weight: 500;
   margin-left:10px;
   text-align: left;
@@ -78,7 +96,7 @@ const onAddClick = (variant: { icon: string; title: string }) => {
 .card-habit__button {
   font-size: 1rem; /* Taille réduite */
   color: white;
-  background-color: #f7c21e; /* Jaune */
+  background-color: #1D1D1F; /* Jaune */
   border: none;
   border-radius: 50%;
   width: 28px; /* Plus petit */
@@ -90,7 +108,4 @@ const onAddClick = (variant: { icon: string; title: string }) => {
   transition: background-color 0.3s ease;
 }
 
-.card-habit__button:hover {
-  background-color: #e5ab00; /* Jaune foncé */
-}
 </style>
