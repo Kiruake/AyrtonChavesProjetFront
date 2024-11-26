@@ -20,6 +20,11 @@ const meta: Meta<typeof Form> = {
       description: 'Placeholder du champ Mot de passe',
       defaultValue: 'Mot de passe',
     },
+    title: {
+      control: 'text',
+      description: 'Titre du formulaire',
+      defaultValue: 'Connexion',
+    },
   },
 };
 export default meta;
@@ -40,12 +45,14 @@ const storyOptions: Omit<Story, 'args'> = {
   }),
 };
 
+// Définitions des stories avec différentes configurations
 export const Default: Story = {
   ...storyOptions,
   args: {
     showTitle: true,
     usernamePlaceholder: 'Nom d’utilisateur',
     passwordPlaceholder: 'Mot de passe',
+    title: 'Connexion',
   },
 };
 
@@ -64,5 +71,25 @@ export const CustomPlaceholders: Story = {
     showTitle: true,
     usernamePlaceholder: 'Entrez votre email',
     passwordPlaceholder: 'Entrez votre mot de passe',
+  },
+};
+
+export const SignUpView: Story = {
+  ...storyOptions,
+  args: {
+    showTitle: true,
+    usernamePlaceholder: 'Créez un nom d’utilisateur',
+    passwordPlaceholder: 'Choisissez un mot de passe',
+    title: 'Inscription',
+  },
+};
+
+export const LoginView: Story = {
+  ...storyOptions,
+  args: {
+    showTitle: true,
+    usernamePlaceholder: 'Nom d’utilisateur',
+    passwordPlaceholder: 'Mot de passe',
+    title: 'Connexion',
   },
 };
