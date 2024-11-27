@@ -1,7 +1,15 @@
 $large: 960px;
+$medium: 768px;
 
-@mixin large-down() {
-    @media screen and (max-width: ($large - 1px)) {
+@mixin large-up() {
+    @media screen and (min-width: ($large - 1px)) {
+      @content;
+    }
+  
+}
+
+@mixin medium-up() {
+    @media screen and (min-width: (medium - 1px)) {
       @content;
     }
   
