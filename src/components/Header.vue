@@ -42,8 +42,6 @@ const toggleMenu = () => {
 
 <style lang="scss">
 
-$mobileBreakpoint: 768px;
-
 .header {
   background-color: $primaryColor;
   color: $secondaryColor;
