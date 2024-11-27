@@ -1,48 +1,54 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import CardAddHabit from './CardAddHabit.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import CardAddHabit from './CardAddHabit.vue';
 
 const meta: Meta<typeof CardAddHabit> = {
   title: 'Components/CardAddHabit',
   component: CardAddHabit,
   argTypes: {
-    variants: {
+    variant: {
       control: { type: 'object' },
     },
-    onAdd: { action: 'add' },
   },
-}
+};
+export default meta;
 
-export default meta
-
-type Story = StoryObj<typeof CardAddHabit>
+type Story = StoryObj<typeof CardAddHabit>;
 
 const storyOptions: Omit<Story, 'args'> = {
   render: (args) => ({
     components: { CardAddHabit },
     setup() {
-      return { args }
+      return { args };
     },
-    template: `<CardAddHabit v-bind="args" @add="args.onAdd" />`,
+    template: `<CardAddHabit v-bind="args" />`,
   }),
-}
+};
 
+// Stories
 export const Default: Story = {
   ...storyOptions,
   args: {
-    variants: [
-      { icon: '😀', title: 'Musculation' },
-      { icon: '🎉', title: 'Fête' },
-      { icon: '📚', title: 'Lecture' },
-    ],
+    variant: { icon: '💪🏾', title: 'Musculation' },
   },
-}
+};
 
-export const CustomVariants: Story = {
+export const Running: Story = {
   ...storyOptions,
   args: {
-    variants: [
-      { icon: '🍕', title: 'Cuisine' },
-      { icon: '🏀', title: 'Sport' },
-    ],
+    variant: { icon: '🏃🏾', title: 'Course à pieds' },
   },
-}
+};
+
+export const Yoga: Story = {
+  ...storyOptions,
+  args: {
+    variant: { icon: '🧘🏻', title: 'Yoga' },
+  },
+};
+
+export const Custom: Story = {
+  ...storyOptions,
+  args: {
+    variant: { icon: '✨', title: 'Votre habitude personnalisée' },
+  },
+};

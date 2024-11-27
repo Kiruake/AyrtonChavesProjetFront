@@ -1,8 +1,8 @@
 @use 'fundations/variables';
 @use 'fundations/functions';
+@use 'fundations/mixins';
 
 body{
 background-color: $bodyBackground;
 margin: 0;
-   
 }

@@ -18,6 +18,7 @@ export default defineConfig({
         additionalData: `
           @use "@/assets/scss/fundations/variables" as *;
           @use "@/assets/scss/fundations/functions" as *;
+          @use "@/assets/scss/fundations/mixins" as *;
         `,
       },
     },
