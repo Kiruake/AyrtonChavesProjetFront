@@ -1,17 +1,17 @@
 // Colors
-$primaryColor: #FFED23;
+$primaryColor: orange;
 $primaryDarkColor: #5538ee;
-$white: #fff;
+$secondaryColor: #f7f7f7;
+$black: #1D1D1F;
 $gray100: #e3e5e5;
 $gray400: #979c9e;
 $gray800: #303437;
+$bodyBackground: white;
 
-$colors: (
-  "red": rgb(133, 13, 13),
-  "green": rgb(56, 184, 56),
-  "blue": rgb(60, 60, 218),
-);
 
 // Fonts
 $fontTextFamily: "Nunito", sans-serif;
+$fontTextSize: 1rem;
+
 $fontTitleFamily: "Bebas Neue", cursive;
+$fontTitleSize: 2.2rem;
