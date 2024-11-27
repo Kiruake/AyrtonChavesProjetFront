@@ -12,10 +12,10 @@ const props = defineProps({
 <template>
   <div class="card-AddHabit">
     <div class="card-AddHabit__icon">
-      {{ variant.icon }}
+      {{ props.variant.icon }}
     </div>
     <div class="card-AddHabit__title">
-      {{ variant.title }}
+      {{ props.variant.title }}
     </div>
     <button class="card-AddHabit__button">+</button>
   </div>
