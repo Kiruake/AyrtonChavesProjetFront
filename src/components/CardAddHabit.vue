@@ -17,9 +17,12 @@ const props = defineProps({
     <div class="card-AddHabit__title">
       {{ props.variant.title }}
     </div>
+    <HorizontalCalendar />
     <button class="card-AddHabit__button">+</button>
   </div>
 </template>
+
+
 
 <style lang="scss">
 .card-AddHabit {
