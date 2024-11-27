@@ -4,11 +4,12 @@ import CardAddHabit from '../components/CardAddHabit.vue';
 const variants = [
   { icon: '💪🏾', title: 'Musculation' },
   { icon: '🏃🏾', title: 'Course à pieds' },
-  { icon: '🚲', title: 'Vélo' },
+  { icon: '🚴🏽‍♂️', title: 'Vélo' },
   { icon: '⚽', title: 'Football' },
   { icon: '🤸🏽‍♂️', title: 'Gym' },
   { icon: '🏊🏽', title: 'Natation' },
   { icon: '🧘🏻', title: 'Yoga' },
+  { icon: '🥊', title: 'Boxe' },
 ];
 </script>
 
@@ -33,6 +34,7 @@ const variants = [
 </template>
 
 <style lang="scss">
+
 .head {
   display: block;
 
@@ -41,22 +43,50 @@ const variants = [
     color: $primaryColor;
     text-align: center;
     margin-bottom: 5px;
+    font-size: $fontTitleSize;
+
+    @include large-up {
+      font-size: $fontTitleSizeLarge;
+        margin-left: 3.5rem;
+        text-align: start;
+        margin-bottom: -30px;
+    }
+
   }
 
   &__subhead {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
+
+    @include large-up {
+        justify-content: flex-start;;
+        margin-left:3.3rem;
+      }
 
     &-icon {
       font-size: $fontSubTitleSize;
       margin-right: 0.7rem;
+
+      @include large-up {
+        font-size: 2.3rem;
+      }
+
+      @include medium-only {
+        font-size: 1.8rem;
+      }
     }
 
     &-text {
       font-family: $fontTitleFamily;
       color: $black;
       font-size: $fontSubTitleSize;
+
+      @include large-up {
+        font-size: $fontTitleSizeLarge;;
+      }
+
     }
   }
 }
@@ -66,5 +96,22 @@ const variants = [
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  @include large-up {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+  
+  @include medium-only {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
 }
+
+
+
 </style>

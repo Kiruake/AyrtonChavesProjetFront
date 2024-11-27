@@ -8,8 +8,8 @@ $medium: 768px;
   
 }
 
-@mixin medium-up() {
-    @media screen and (min-width: (medium - 1px)) {
+@mixin medium-only() {
+    @media screen and (min-width: ($medium - 1px)) and (max-width: ($large - 1px)) {
       @content;
     }
   

@@ -30,9 +30,17 @@ const props = defineProps({
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
-  width: 100%;
+  width: 80%;
   max-width: 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @include large-up{
+   width: 20%;
+  }
+
+  @include medium-only{
+   width: 40%;
+  }
 
   &__icon {
     font-size: $fontTextSize;
