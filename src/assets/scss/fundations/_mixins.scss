@@ -1,0 +1,8 @@
+$large: 960px;
+
+@mixin large-down() {
+    @media screen and (max-width: ($large - 1px)) {
+      @content;
+    }
+  
+}
