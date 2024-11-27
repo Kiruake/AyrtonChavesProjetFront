@@ -32,32 +32,32 @@ const onAddClick = (index: number) => {
 </script>
 
 <template>
-  <div v-for="(variant, index) in localVariants" :key="index" class="card-habit">
+  <div v-for="(variant, index) in localVariants" :key="index" class="card-AddHabit">
     <div
-      class="card-habit__icon"
+      class="card-AddHabit__icon"
       contenteditable="true"
       @input="updateIcon(index, $event)"
     >
       {{ variant.icon }}
     </div>
     <div
-      class="card-habit__title"
+      class="card-AddHabit__title"
       contenteditable="true"
       @input="updateTitle(index, $event)"
     >
       {{ variant.title }}
     </div>
-    <button class="card-habit__button" @click="onAddClick(index)">+</button>
+    <button class="card-AddHabit__button" @click="onAddClick(index)">+</button>
   </div>
 </template>
 
 <style lang="scss">
 
-.card-habit {
+.card-AddHabit {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #FFFFFF;
+  background-color: $secondaryColor;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
@@ -67,7 +67,7 @@ const onAddClick = (index: number) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &__icon {
-      font-size: 1rem; 
+      font-size: $fontTextSize;
       margin-right: 10px;
       flex-shrink: 0;
       cursor: text; 
@@ -76,8 +76,8 @@ const onAddClick = (index: number) => {
 
     &__title {
       flex-grow: 1;
-      font-size: 1rem;
-      color: #1D1D1F;
+      font-size: $fontTextSize;
+      color: $black;
       font-weight: 500;
       margin-left:10px;
       text-align: left;
@@ -90,9 +90,9 @@ const onAddClick = (index: number) => {
     }
 
     &__button {
-      font-size: 1rem; 
-      color: black;
-      background-color: #FFED23;
+      font-size: $fontTextSize; 
+      color: $secondaryColor;
+      background-color: $primaryColor;
       border: none;
       border-radius: 50%;
       width: 22px;

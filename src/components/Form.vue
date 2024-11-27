@@ -90,10 +90,10 @@ defineProps({
   }
 
   &__title {
-    font-size: 2.3rem;
+    font-size: $fontTitleSize;
     margin-bottom: 60px;
-    color: #FFED23;
-    font-family: $fontTextFamily;
+    color: $primaryColor;
+    font-family: $fontTitleFamily;
   }
 
   &__field {
@@ -105,14 +105,15 @@ defineProps({
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: $fontTextSize;
+    font-family: $fontTextFamily;
 
     &--text {
-      font-size: 1rem;
+      font-size: $fontTextSize;
     }
 
     &--password {
-      font-size: 1rem;
+      font-size: $fontTextSize;
     }
 
     &:focus {
@@ -121,12 +122,9 @@ defineProps({
     }
   }
 
-  &__actions {
-    margin-top: 20px;
-
-    .login__alternate-action {
+    &__alternate-action {
       margin-top: 30px;
-      font-size: 0.9rem;
+      font-size: $fontTextSize;
       color: $gray800;
       font-family: $fontTextFamily;
       cursor: pointer;
@@ -134,9 +132,10 @@ defineProps({
       text-decoration: underline;
 
       &:hover {
-        color: #FFED23;
+        color: $primaryColor;
       }
-    }
+
+  
   }
 }
 

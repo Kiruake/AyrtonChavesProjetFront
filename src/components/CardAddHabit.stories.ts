@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import CardHabit from './CardHabit.vue'
+import CardAddHabit from './CardAddHabit.vue'
 
-const meta: Meta<typeof CardHabit> = {
-  title: 'Components/CardHabit',
-  component: CardHabit,
+const meta: Meta<typeof CardAddHabit> = {
+  title: 'Components/CardAddHabit',
+  component: CardAddHabit,
   argTypes: {
     variants: {
       control: { type: 'object' },
@@ -14,15 +14,15 @@ const meta: Meta<typeof CardHabit> = {
 
 export default meta
 
-type Story = StoryObj<typeof CardHabit>
+type Story = StoryObj<typeof CardAddHabit>
 
 const storyOptions: Omit<Story, 'args'> = {
   render: (args) => ({
-    components: { CardHabit },
+    components: { CardAddHabit },
     setup() {
       return { args }
     },
-    template: `<CardHabit v-bind="args" @add="args.onAdd" />`,
+    template: `<CardAddHabit v-bind="args" @add="args.onAdd" />`,
   }),
 }
 
