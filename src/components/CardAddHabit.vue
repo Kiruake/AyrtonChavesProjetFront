@@ -5,9 +5,13 @@ const props = defineProps({
   variants: {
     type: Array as () => { icon: string; title: string }[],
     default: () => [
-      { icon: '😀', title: 'Musculation' },
-      { icon: '🎉', title: 'Fête' },
-      { icon: '📚', title: 'Lecture' },
+      { icon: '💪🏾', title: 'Musculation' },
+      { icon: '🏃🏾', title: 'Course à pieds' },
+      { icon: '🚲', title: 'Vélo' },
+      { icon: '⚽', title: 'Football' },
+      { icon: '🤸🏽‍♂️', title: 'Gym' },
+      { icon: '🏊🏽', title: 'Natation' },
+      { icon: '🧘🏻', title: 'Yoga' },
     ],
   },
 });
@@ -61,7 +65,7 @@ const onAddClick = (index: number) => {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
-  width: 90%;
+  width: 85%;
   max-width: 400px;
   margin: 10px auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -95,8 +99,8 @@ const onAddClick = (index: number) => {
       background-color: $primaryColor;
       border: none;
       border-radius: 50%;
-      width: 22px;
-      height: 22px; 
+      width: 18px;
+      height: 18px; 
       display: flex;
       align-items: center;
       justify-content: center;
