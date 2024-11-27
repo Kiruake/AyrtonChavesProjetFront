@@ -10,6 +10,10 @@ const variants = [
   { icon: '🏊🏽', title: 'Natation' },
   { icon: '🧘🏻', title: 'Yoga' },
   { icon: '🥊', title: 'Boxe' },
+  { icon: '💧', title: 'Hydratation' },
+  { icon: '🪢', title: 'Corde à sauter' },
+  { icon: '👟', title: 'HIIT' },
+  { icon: '🎾', title: 'Tennis' },
 ];
 </script>
 
@@ -23,6 +27,7 @@ const variants = [
       </div>
     </div>
 
+    
     <div class="cards">
       <CardAddHabit
         v-for="(variant, index) in variants"
