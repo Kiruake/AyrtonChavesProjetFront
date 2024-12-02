@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-import MyButton from '~/components/Button.vue'; // Chemin basé sur l'alias @/components
+import MyButton from '~/components/Button/Button.vue'; // Chemin basé sur l'alias @/components
 import { useRoute } from '#app'; // Utilisation de useRoute propre à Nuxt
 
 const route = useRoute(); // Récupère la route actuelle
