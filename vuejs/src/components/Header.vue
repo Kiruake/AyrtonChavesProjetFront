@@ -13,7 +13,7 @@ const toggleMenu = () => {
 <template>
   <header class="header">
     <div class="header__container">
-      <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo" />
+      <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo" >
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
           <li class="header__item">
@@ -31,10 +31,10 @@ const toggleMenu = () => {
         </ul>
       </nav>
       <!-- Bouton hamburger pour le mobile -->
-      <button class="header__toggle" @click="toggleMenu" aria-label="Toggle Menu">
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
+      <button class="header__toggle" aria-label="Toggle Menu" @click="toggleMenu">
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
       </button>
     </div>
   </header>
