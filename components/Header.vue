@@ -17,16 +17,16 @@ const toggleMenu = () => {
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
           <li class="header__item">
-            <a href="#" class="header__link">Mes habitudes</a>
+         <NuxtLink to="/" > <a href="#" class="header__link">Mes habitudes</a></NuxtLink>
           </li>
           <li class="header__item">
-            <a href="#" class="header__link">Ajouter une habitude</a>
+           <NuxtLink to="/habits" > <a href="#" class="header__link">Ajouter une habitude</a></NuxtLink>
           </li>
           <li class="header__item">
-            <a href="#" class="header__link">Historique</a>
+           <NuxtLink to="/history" > <a href="#" class="header__link">Historique</a></NuxtLink>
           </li>
           <li class="header__item">
-            <a href="#" class="header__link">Rapport mensuel</a>
+           <NuxtLink to="/report" > <a href="#" class="header__link">Rapport mensuel</a></NuxtLink>
           </li>
         </ul>
       </nav>
