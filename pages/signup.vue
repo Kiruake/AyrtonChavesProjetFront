@@ -2,7 +2,6 @@
 definePageMeta({
     layout: 'minimal'
 })
-
 </script>
 
 <template>
@@ -10,11 +9,11 @@ definePageMeta({
 
   <div class="homepage">
   <video class="homepage__video" autoplay loop muted>
-    <source  src="/videos/video_login.mp4" type="video/mp4">
+    <source  src="/videos/video_signUp.mp4" type="video/mp4">
   </video>
   </div>
 
-<Form :title="'Connexion'"/>
+<Form :title="'Inscription'"/>
 
 
   </main>
