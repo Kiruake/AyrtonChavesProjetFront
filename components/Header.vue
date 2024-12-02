@@ -20,7 +20,7 @@ const toggleMenu = () => {
          <NuxtLink to="/" > <a href="#" class="header__link">Mes habitudes</a></NuxtLink>
           </li>
           <li class="header__item">
-           <NuxtLink to="/habits" > <a href="#" class="header__link">Ajouter une habitude</a></NuxtLink>
+           <NuxtLink to="/addhabits" > <a href="#" class="header__link">Ajouter une habitude</a></NuxtLink>
           </li>
           <li class="header__item">
            <NuxtLink to="/history" > <a href="#" class="header__link">Historique</a></NuxtLink>
