@@ -19,6 +19,7 @@ export default defineConfig({
           @use "@/assets/scss/fundations/variables" as *;
           @use "@/assets/scss/fundations/functions" as *;
           @use "@/assets/scss/fundations/mixins" as *;
+          @use "@assets/scss/fundations/fonts" as *;
         `,
       },
     },
