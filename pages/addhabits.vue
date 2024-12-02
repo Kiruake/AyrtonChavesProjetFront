@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import CardAddHabit from '../components/CardAddHabit.vue';
+import CardAddHabit from '../components/CardAddHabit/CardAddHabit.vue';
 
 const variants = ref([
   { icon: '💪🏾', title: 'Musculation' },
