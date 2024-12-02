@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CardAddHabit from '../components/CardAddHabit.vue';
+import MyButton from '../components/Button.vue';
 
 const variants = [
   { icon: '💪🏾', title: 'Musculation' },
@@ -35,6 +36,13 @@ const variants = [
         :variant="variant"
       />
     </div>
+
+    <div class="fixed-button">
+    <button class="fixed-button__btn">
+      <p>Custom habits</p>
+    </button>
+  </div>
+
   </main>
 </template>
 
@@ -114,6 +122,41 @@ const variants = [
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
+  }
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 20px; /* Distance depuis le bas de l'écran */
+  left: 50%; /* Centrer horizontalement */
+  transform: translateX(-50%); /* Ajuster pour un centrage exact */
+  z-index: 1000; /* S'assurer qu'il soit au-dessus d'autres éléments */
+
+  &__btn {
+    background-color: orange;
+    color: #f7f7f7;
+    border: none;
+    font-weight: 700;
+    border-radius: 64px;
+    width: 140px;
+    font-size: 0.9rem;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1); /* Légère augmentation au survol */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: scale(1); /* Réduction lors du clic */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
