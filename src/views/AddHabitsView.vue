@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CardAddHabit from '../components/CardAddHabit.vue';
-import MyButton from '../components/Button.vue';
 
 const variants = [
   { icon: '💪🏾', title: 'Musculation' },
