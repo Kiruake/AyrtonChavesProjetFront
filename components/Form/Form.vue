@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import MyButton from '~/components/Button/Button.vue'; // Chemin basé sur l'alias @/components
-import { useRoute } from '#app'; // Utilisation de useRoute propre à Nuxt
 
 const route = useRoute(); // Récupère la route actuelle
 
@@ -60,7 +57,7 @@ defineProps({
       >
     </div>
     <div class="login__actions">
-      <MyButton
+      <Button
         class="button -connexion"
         :label="buttonLabel"
       />
