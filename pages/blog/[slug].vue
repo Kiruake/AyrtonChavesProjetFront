@@ -13,8 +13,8 @@ const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: r
   <main>
     <div v-if ="post" class="blog-slug">
       <h1 class="blog-slug__title" >{{ post.title }}</h1>
-      <p class="blog-slug__date">{{ post.publishedAt }}</p>
-      <SanityContent class="blog-slug__content" :blocks="post.body"/>
+      <p class="blog-slug__date">{{ new Date(post.publishedAt).toLocaleString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
+      <p class="blog-slug__content"><SanityContent  :blocks="post.body"/></p>
       <SanityImage v-if="post.image" :asset-id="post.image.asset._ref" />
     </div>
 
@@ -41,6 +41,10 @@ const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: r
   }
   &__content {
     font-size: 1.6rem;
+    width: 80%;
+    display: block;
+    margin: auto;
+    text-align: center;
   }
 }
 
