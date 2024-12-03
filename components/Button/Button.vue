@@ -34,6 +34,11 @@ defineProps<{
         background: $primaryDarkColor;
     }
 
+    &.-center {
+       margin: auto;
+       display:flex;
+    }
+
     &.-outline {
         background: transparent;
         color: $primaryColor;
