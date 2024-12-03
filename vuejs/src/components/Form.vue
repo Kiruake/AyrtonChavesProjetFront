@@ -37,6 +37,7 @@ defineProps({
   },
   title: {
     type: String,
+    default: 'Connexion',
   },
 });
 </script>
@@ -44,7 +45,7 @@ defineProps({
 <template>
   <section class="login">
     <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo" >
-    <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
+    <h2 v-if="showTitle" class="login__title">{{ title  }}</h2>
     <div class="login__field">
       <input
         type="text"
