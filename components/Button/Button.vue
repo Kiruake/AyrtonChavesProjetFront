@@ -37,6 +37,11 @@ defineProps<{
     &.-center {
        margin: auto;
        display:flex;
+
+       &:hover {
+            background-color: transparent;
+            color: $primaryColor;
+        }
     }
 
     &.-outline {
@@ -44,8 +49,8 @@ defineProps<{
         color: $primaryColor;
 
         &:hover {
-            color: $primaryDarkColor;
-            border-color: $primaryDarkColor;
+            background-color: none;
+            color: $primaryColor;
         }
 
         &.-disabled {
