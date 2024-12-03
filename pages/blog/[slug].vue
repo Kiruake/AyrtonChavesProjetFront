@@ -11,7 +11,7 @@ const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: r
 
 <template>
   <main>
-    <div class="blog-slug" v-if ="post">
+    <div v-if ="post" class="blog-slug">
       <h1 class="blog-slug__title" >{{ post.title }}</h1>
       <p class="blog-slug__date">{{ post.publishedAt }}</p>
       <SanityContent class="blog-slug__content" :blocks="post.body"/>

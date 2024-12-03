@@ -27,7 +27,7 @@ const urlFor = (source: SanityImageSource) =>
                 <NuxtLink :to="`/blog/${post.slug.current}`">  
                     <h1>{{ post.title }}</h1>
                 
-                <img v-if="post.image" :src="urlFor(post.image)?.url()"/>  
+                <img v-if="post.image" :src="urlFor(post.image)?.url()">  
                 <div v-else>Pas d'image</div>       
                 </NuxtLink>
             </div>
