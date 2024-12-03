@@ -7,6 +7,10 @@ const  route  = useRoute();
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: route.params.slug});
 
+if (!post.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Post not found' });
+}
+
 </script>
 
 <template>
@@ -19,12 +23,7 @@ const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: r
         <p class="blog-slug__content"><SanityContent :blocks="post.body" /></p>
         <SanityImage v-if="post.image" :asset-id="post.image.asset._ref" />
       </div>
-
-      <div v-else class="error-404">
-        <h1 class="error-404__title">404 - Page non trouvée</h1>
-        <p class="error-404__content">Le contenu que vous recherchez n'existe pas ou a été supprimé.</p>
-      </div>
-
+ 
     </main>
   </template>
   
