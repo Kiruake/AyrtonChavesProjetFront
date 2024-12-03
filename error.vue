@@ -19,7 +19,7 @@ import type { NuxtError } from '#app'
             <h1 class="error__title">{{ error.statusCode }}</h1>
             <p class="error__content">{{ error.message }}</p>
         </div>
-        <button class="button -center" @click="handleError">Retour</button>
+        <Button class="button -center" :label="'Retourner à l\'accueil'" @click="handleError"></Button>
     </main>
 </template>
 
