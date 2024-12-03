@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
-const props = defineProps({
-  error: Object as () => NuxtError
-
-})
+ defineProps({
+  error : {
+    type: Object as () => NuxtError,
+    default: null
+  }})
 
  const handleError = () => {
      clearError({ redirect: '/' })
@@ -14,11 +15,11 @@ const props = defineProps({
 
 <template>
     <main>
-        <div class ="error" v-if="error">
+        <div v-if="error" class ="error">
             <h1 class="error__title">{{ error.statusCode }}</h1>
             <p class="error__content">{{ error.message }}</p>
         </div>
-        <button class="button -center"click="handleError">Retour</button>
+        <button class="button -center" @click="handleError">Retour</button>
     </main>
 </template>
 
