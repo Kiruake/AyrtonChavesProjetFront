@@ -37,6 +37,7 @@ defineProps({
   },
   title: {
     type: String,
+    default: 'Connexion',
   },
 });
 </script>
