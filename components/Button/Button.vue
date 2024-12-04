@@ -4,6 +4,7 @@ defineProps<{
     variant?: "primary" | "outline" ;
     label?: string
     active?: boolean
+    number?: number
 }>();
 
 </script>
@@ -17,6 +18,7 @@ defineProps<{
         '-active': active
     }">
         {{label}}
+        {{ number }}
     </button>
 </template>
 

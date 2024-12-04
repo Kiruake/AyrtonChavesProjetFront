@@ -83,7 +83,7 @@ function onCategoryClick(category: SanityDocument) {
 
             <div class="c-blog__categories">
             <div v-for="category in post.categories" :key="category._id">
-                <button class="button -small -blog">{{ category.title }}</button>
+                <Button class="button -small -blog" :label="category.title"></Button>
             </div>
             </div>
         </div>
@@ -94,7 +94,7 @@ function onCategoryClick(category: SanityDocument) {
     
     <div class="c-blog__pagination">
         <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
-            <Button class="button -outline" :class="{'-is-active': page === i}" :label="i"></Button>
+            <Button class="button -outline" :active="page === i" :number="i"></Button>
         </div>
     </div>
     </main>
