@@ -2,16 +2,19 @@
 
 import type { SanityDocument } from "@sanity/client";
 
+
+
+
 const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
     title,
     publishedAt,
     body,
     image,
     "categories": categories[]->{
-      title,
+        title,
       slug
     }
-  }`;
+    }`;
 const  route  = useRoute();
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: route.params.slug});
@@ -20,6 +23,13 @@ if (!post.value) {
     throw createError({ statusCode: 404, statusMessage: 'Post not found' });
 }
 
+const { urlFor } = useSanityImage();
+
+useSeoMeta({
+    title: "Tracking App | " + post.value.title,
+    ogTitle: "Tracking App | " + post.value.title,
+    ogImage: urlFor(post.value.image)?.url(),
+})
 </script>
 
 <template>
