@@ -6,7 +6,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 const filter= ref<string>('');
 
 const page = ref<number>(1);
-const perPage = 2;
+const perPage = 3;
 
 const start = computed(() => (page.value - 1) * perPage);
 const end = computed(() => page.value * perPage);
@@ -47,6 +47,7 @@ const urlFor = (source: SanityImageSource) =>
     : null;
     
 function onCategoryClick(category: SanityDocument) {
+    page.value = 1;
     filter.value = category.slug.current;
 }
 
@@ -58,8 +59,6 @@ function onCategoryClick(category: SanityDocument) {
 
         <h1 class="a-title">Tous les articles</h1>
 
-        {{ page }}
-
         <div class="c-categories">
         <div :class="['c-categories__item' , {'-is-active': filter === category.slug.current}]" v-for="category in categories" :key="category._id" @click="onCategoryClick(category)">
             <button class="button -outline">{{ category.title }}</button>
@@ -67,6 +66,7 @@ function onCategoryClick(category: SanityDocument) {
         </div>
 
         <div class="c-blog">
+        <div v-if="!posts || posts.length === 0">Il n'y a pas d'articles</div>
         <div v-for="post in posts" :key="post._id">
             <div>
             <NuxtLink :to="`/blog/${post.slug.current}`">  
@@ -79,20 +79,20 @@ function onCategoryClick(category: SanityDocument) {
 
             <div class="c-blog__categories">
             <div v-for="category in post.categories" :key="category._id">
-                <button class="button -small">{{ category.title }}</button>
+                <button class="button -small -blog">{{ category.title }}</button>
             </div>
             </div>
         </div>
 
         
-        <div class="c-blog__pagination">
-            <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
-                <button class="button -small" :class="{'-is-active': page === i}">{{ i }}</button>
-            </div>
-        </div>
-
+        
     </div>
-
+    
+    <div class="c-blog__pagination">
+        <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
+            <button class="button -outline" :class="{'-is-active': page === i}">{{ i }}</button>
+        </div>
+    </div>
     </main>
 
 </template>
@@ -144,6 +144,7 @@ function onCategoryClick(category: SanityDocument) {
   &__image {
     width: 300px;
     height: 300px;
+    position:relative;
     object-fit: cover;
     display: block;
     margin: auto;
@@ -164,6 +165,16 @@ function onCategoryClick(category: SanityDocument) {
     text-align: center;
     margin-bottom: 5px;
     font-size: 1.2rem;
+  }
+
+  &__pagination {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 }
 

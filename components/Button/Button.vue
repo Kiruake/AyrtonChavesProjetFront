@@ -73,6 +73,17 @@ defineProps<{
 
     &.-small {
         padding: rem(8px) rem(16px);
+
+        &:hover {
+            background-color: $primaryColor;
+            color: $black;
+        }
+
+        &.-blog {
+            position: relative;
+            top: -80px;
+
+        }
     }
 }
 </style>
