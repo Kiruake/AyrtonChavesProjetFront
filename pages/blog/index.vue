@@ -6,15 +6,14 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 const filter= ref<string>('');
 
 const page = ref<number>(1);
+const perPage = 2;
 
-const start = computed(() => (page.value - 1) * 2);
-const end = computed(() => page.value * 2);
+const start = computed(() => (page.value - 1) * perPage);
+const end = computed(() => page.value * perPage);
 
 function onPageClick(index: number) {
     page.value = index;
 }
-
-
 
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(groq`*[
@@ -23,7 +22,18 @@ const { data: posts } = await useSanityQuery<SanityDocument[]>(groq`*[
     && ($filter == '' || $filter in (categories[]->slug.current))
     ]|order(publishedAt desc)[$start...$end]{_id, image, "categories": categories[]->{_id,title, slug}, title, slug, publishedAt} `
     ,{filter, start: start, end: end}); 
-  
+    
+    const { data: postsCount } = await useSanityQuery<number>(groq`count(*[
+    _type == "post"
+    && defined(slug.current)
+    && ($filter == '' || $filter in (categories[]->slug.current))
+    
+])`, {filter});
+
+const NbMaxPages = computed(() => {
+    if (!postsCount.value) return 1;
+    return Math.ceil(postsCount.value / perPage);
+});
 
 const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
     _type == "category"
@@ -76,12 +86,11 @@ function onCategoryClick(category: SanityDocument) {
 
         
         <div class="c-blog__pagination">
-            <div v-for ="i in 3" :key="i" class="c-blog__pagination-item" @click="onPageClick(i)" >
+            <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
                 <button class="button -small" :class="{'-is-active': page === i}">{{ i }}</button>
             </div>
-        
-        
-    </div>
+        </div>
+
     </div>
 
     </main>
