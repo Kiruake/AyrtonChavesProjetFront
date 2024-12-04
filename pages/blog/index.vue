@@ -48,7 +48,11 @@ const urlFor = (source: SanityImageSource) =>
     
 function onCategoryClick(category: SanityDocument) {
     page.value = 1;
-    filter.value = category.slug.current;
+    if (filter.value === category.slug.current) {
+        filter.value = '';
+    } else {
+        filter.value = category.slug.current;
+    }    
 }
 
 </script>
@@ -120,9 +124,6 @@ function onCategoryClick(category: SanityDocument) {
     margin-bottom: 5px;
     font-size: 1.2rem;
 
-    &.-is-active {
-      color: $secondaryColor;
-    }
   }
 }
 

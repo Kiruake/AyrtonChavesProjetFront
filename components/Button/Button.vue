@@ -82,7 +82,6 @@ defineProps<{
         &.-blog {
             position: relative;
             top: -80px;
-
         }
     }
 }
