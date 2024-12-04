@@ -3,24 +3,42 @@ import type { SanityDocument } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, image, "categories": categories[]->{_id,title, slug}, title, slug, publishedAt}`;
+const filter= ref<string>('');
 
-const CATEGORIES_QUERY = groq`*[
-  _type == "category"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id ,title, slug}`;
+const page = ref<number>(1);
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
-const { data: categories } = await useSanityQuery<SanityDocument[]>(CATEGORIES_QUERY);
+const start = computed(() => (page.value - 1) * 2);
+const end = computed(() => page.value * 2);
 
+function onPageClick(index: number) {
+    page.value = index;
+}
+
+
+
+
+const { data: posts } = await useSanityQuery<SanityDocument[]>(groq`*[
+    _type == "post"
+    && defined(slug.current)
+    && ($filter == '' || $filter in (categories[]->slug.current))
+    ]|order(publishedAt desc)[$start...$end]{_id, image, "categories": categories[]->{_id,title, slug}, title, slug, publishedAt} `
+    ,{filter, start: start, end: end}); 
+  
+
+const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
+    _type == "category"
+    && defined(slug.current)
+    ]{_id ,title, slug}`);
+    
 const { projectId, dataset } = useSanity().client.config();
 const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
+    projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+    
+function onCategoryClick(category: SanityDocument) {
+    filter.value = category.slug.current;
+}
 
 </script>
 
@@ -30,11 +48,11 @@ const urlFor = (source: SanityImageSource) =>
 
         <h1 class="a-title">Tous les articles</h1>
 
+        {{ page }}
+
         <div class="c-categories">
-        <div class="c-categories__item" v-for="category in categories" :key="category._id">
-            <NuxtLink :to="`/blog/category/${category.slug.current}`">
-            <button class="button -small">{{ category.title }}</button>
-            </NuxtLink>
+        <div :class="['c-categories__item' , {'-is-active': filter === category.slug.current}]" v-for="category in categories" :key="category._id" @click="onCategoryClick(category)">
+            <button class="button -outline">{{ category.title }}</button>
         </div>
         </div>
 
@@ -51,14 +69,20 @@ const urlFor = (source: SanityImageSource) =>
 
             <div class="c-blog__categories">
             <div v-for="category in post.categories" :key="category._id">
-                <NuxtLink :to="`/blog/category/${category.slug.current}`">
                 <button class="button -small">{{ category.title }}</button>
-                </NuxtLink>
             </div>
             </div>
-        </div>
         </div>
 
+        
+        <div class="c-blog__pagination">
+            <div v-for ="i in 3" :key="i" class="c-blog__pagination-item" @click="onPageClick(i)" >
+                <button class="button -small" :class="{'-is-active': page === i}">{{ i }}</button>
+            </div>
+        
+        
+    </div>
+    </div>
 
     </main>
 
@@ -86,6 +110,10 @@ const urlFor = (source: SanityImageSource) =>
     text-align: center;
     margin-bottom: 5px;
     font-size: 1.2rem;
+
+    &.-is-active {
+      color: $secondaryColor;
+    }
   }
 }
 

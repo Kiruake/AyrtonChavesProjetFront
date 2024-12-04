@@ -49,8 +49,8 @@ defineProps<{
         color: $primaryColor;
 
         &:hover {
-            background-color: none;
-            color: $primaryColor;
+            background-color: $primaryColor;
+            color: $black;
         }
 
         &.-disabled {
