@@ -24,7 +24,7 @@ const toggleMenu = () => {
            <a href="#" class="header__link">Historique</a>
           </li>
           <li class="header__item">
-           <a href="#" class="header__link">Rapport mensuel</a>
+            <NuxtLink to="/login" ><a href="#" class="header__link">Connexion</a></NuxtLink> 
           </li>
         </ul>
       </nav>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import type { SanityDocument } from "@sanity/client";
+import { url } from "inspector";
 
 
 
@@ -28,7 +29,7 @@ const { urlFor } = useSanityImage();
 useSeoMeta({
     title: "Tracking App | " + post.value.title,
     ogTitle: "Tracking App | " + post.value.title,
-    ogImage: urlFor(post.value.image)?.url(),
+    ogImage: post.value.image && urlFor(post.value.image) ? urlFor(post.value.image)?.url() : '/images/LogoTracker.svg'
 })
 </script>
 

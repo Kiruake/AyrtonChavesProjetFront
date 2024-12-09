@@ -1,7 +1,22 @@
 <script setup lang="ts">
-definePageMeta({
-    layout: 'minimal'
-})
+
+import type { SanityDocument } from "@sanity/client";
+
+
+const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
+  *[_type == "homepage" && defined(hero)][0] {
+    title,
+    hero {
+      title,
+      text,
+      stats[] {
+        value,
+        text
+      }
+    }
+  }
+`);
+ 
 
 </script>
 
@@ -9,32 +24,24 @@ definePageMeta({
   <main>
 
   <div class="homepage">
-  <video class="homepage__video" autoplay loop muted>
-    <source  src="/videos/video_login.mp4" type="video/mp4">
-  </video>
+    <h1>{{ homepage?.title }}</h1> 
+  </div>
+  
+  <div>
+    <p>{{ homepage?.hero.title }}</p>
+    <p>{{ homepage?.hero.text }}</p>
   </div>
 
-<Form :title="'Connexion'"/>
+
+  <div>
+    <ul>
+      <li v-for="stat in homepage?.hero.stats" :key="stat._key">
+        <p>{{ stat.value }}</p>
+        <p>{{ stat.text }}</p>
+      </li>
+    </ul>
+  </div>
 
 
   </main>
 </template>
-
-<style lang="scss">
-
-.homepage {
-  display: block;
-
-&__video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  display: block;
-  position: fixed; 
-  top: 0;
-  left: 0;
-  z-index: -1; 
-}
-
-}
-</style>
