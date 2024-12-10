@@ -2,21 +2,22 @@
 
 
 
-const { data, error, refresh } = await useAsyncData(
-  'fetchDashboard', // Clé unique
-  () =>
-    $fetch('http://localhost:4000/dashboard', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-      },
-    })
-);
+const {data, refresh } = await useAsyncData('dashboard', async () => { 
 
-const habitTitle = ref('');
-const habitDescription = ref('');
-const habitIsGlobal = ref(false);
+
+const response = await fetch(`http://localhost:4000/dashboard`, {
+    method: 'GET',
+    headers: {
+        Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`
+    }
+});
+
+
+console.log('response : ', response);
+
+return  await response.json();
+});
+
 const feedbackMessage = ref('');
 
 
@@ -24,42 +25,7 @@ const habitTitleEdit = ref('');
 const habitDescriptionEdit = ref('');
 const habitIsGlobalEdit = ref(false);
 
-async function addHabit() {
-  try {
-    const response = await fetch('http://localhost:4000/habits', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${useCookie('api_tracking_jwt').value}`
-      },
-      body: JSON.stringify({
-        title: habitTitle.value,
-        description: habitDescription.value,
-        is_global: habitIsGlobal.value
 
-      })
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      feedbackMessage.value = `Erreur : ${error.message}`;
-      console.error('Erreur:', error);
-      return;
-    }
-    
-    const data = await response.json();
-    feedbackMessage.value = `Habitude ajoutée : ${data.title}`;
-    console.log('Succès:', data);
-    
-    // Réinitialiser les champs du formulaire
-    habitTitle.value = '';
-    habitDescription.value = '';
-    refresh();
-} catch (error) {
-    feedbackMessage.value = 'Erreur réseau ou interne';
-    console.error('Erreur réseau ou interne:', error);
-}
-}
 
 const selectedHabit = ref(null);
 
@@ -150,6 +116,10 @@ async function deleteHabit(habit) {
 
 
 
+function onHabitCreated() {
+    console.log('une nouvelle habitude a été créée');
+    refresh();
+}
 
 </script>
 
@@ -221,41 +191,7 @@ async function deleteHabit(habit) {
   </div>
 
 
-  <div>
-    <h2>Ajouter une habitude</h2>
-    <form @submit.prevent="addHabit">
-      <div>
-        <label for="habitTitle">Titre :</label>
-        <input
-          id="habitTitle"
-          v-model="habitTitle"
-          type="text"
-          placeholder="Titre de l'habitude"
-          required
-        />
-      </div>
-      <div>
-        <label for="habitDescription">Description :</label>
-        <textarea
-          id="habitDescription"
-          v-model="habitDescription"
-          placeholder="Description de l'habitude"
-        ></textarea>
-      </div>
-
-      <div>
-        <label for="habitIsGlobal">Rendre publique?</label>    
-        <input
-          id="habitIsGlobal"
-          v-model="habitIsGlobal"
-          type="checkbox"
-        />
-      </div>
-
-      <button type="submit">Ajouter</button>
-    </form>
-    <p v-if="feedbackMessage">{{ feedbackMessage }}</p>
-  </div>
+  <AddHabitForm @habit:created="onHabitCreated" />
 
 
 
