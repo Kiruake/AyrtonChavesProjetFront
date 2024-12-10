@@ -35,18 +35,44 @@ defineProps({
   },
 });
 
+const username = ref('');
+const password = ref('');
+
+async function onSubmit(event: Event) {
+  event.preventDefault(); // Empêche le rechargement de la page
+  
+  const response = await fetch('http://localhost:4000/auth/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value
+    })
+  })
+
+ if (!response.ok) throw new Error('Une erreur est survenue lors de la connexion')
+
+ const data = await response.json();
+
+  console.log(data);
+  const cookieJwt = useCookie('api_tracking_jwt');
+  cookieJwt.value = data.token
+  
+}
 
 
 </script>
 
 <template>
-  <form class="login">
+  <form @submit="onSubmit" class="login">
     <!-- Utilisation de l'alias /_nuxt pour les assets statiques dans Nuxt -->
     <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo">
     <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
     <div class="login__field">
       <input
-        type="username" id="username"
+        v-model="username" type="username" id="username"
         class="login__input login__input--text"
         :placeholder="usernamePlaceholder"
         aria-label="Nom d’utilisateur"
@@ -54,7 +80,7 @@ defineProps({
     </div>
     <div class="login__field">
       <input
-       
+        v-model="password"
         type="password" id="password"
         class="login__input login__input--password"
         :placeholder="passwordPlaceholder"
