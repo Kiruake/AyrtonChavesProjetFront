@@ -24,7 +24,7 @@ const toggleMenu = () => {
            <a href="#" class="header__link">Historique</a>
           </li>
           <li class="header__item">
-           <a href="#" class="header__link">Rapport mensuel</a>
+            <NuxtLink to="/login" ><a href="#" class="header__link">Connexion</a></NuxtLink> 
           </li>
         </ul>
       </nav>
@@ -121,14 +121,14 @@ const toggleMenu = () => {
 
   &__link {
     text-decoration: none;
-    color: $secondaryColor;
+    color: #F1F7F7;
     font-size: $fontSubTitleSize;
     font-weight: 700;
     transition: color 0.3s ease;
     font-family: 'Nunito', sans-serif;
 
     &:hover {
-      color: black;
+      color: $thirdColor;
     }
 
     @include large-up {

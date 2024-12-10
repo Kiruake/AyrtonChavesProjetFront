@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+useSeoMeta({
+    title: "Blog | Tracking App",
+    description: "Tout les articles pour vous aider dans votre quotidien",
+    ogDescription: "Tout les articles pour vous aider dans votre quotidien",
+    ogImage: "/images/LogoTracker.svg",
+});
 
 const filter= ref<string>('');
 
@@ -40,11 +45,7 @@ const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
     && defined(slug.current)
     ]{_id ,title, slug}`);
     
-const { projectId, dataset } = useSanity().client.config();
-const urlFor = (source: SanityImageSource) =>
-    projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
+    const { urlFor } = useSanityImage();
     
 function onCategoryClick(category: SanityDocument) {
     page.value = 1;
@@ -65,7 +66,7 @@ function onCategoryClick(category: SanityDocument) {
 
         <div class="c-categories">
         <div :class="['c-categories__item' , {'-is-active': filter === category.slug.current}]" v-for="category in categories" :key="category._id" @click="onCategoryClick(category)">
-            <button class="button -outline">{{ category.title }}</button>
+            <Button class="button -outline" :label="category.title" :active="filter === category.slug.current"></Button>
         </div>
         </div>
 
@@ -83,7 +84,7 @@ function onCategoryClick(category: SanityDocument) {
 
             <div class="c-blog__categories">
             <div v-for="category in post.categories" :key="category._id">
-                <button class="button -small -blog">{{ category.title }}</button>
+                <Button class="button -small -blog" :label="category.title"></Button>
             </div>
             </div>
         </div>
@@ -94,7 +95,7 @@ function onCategoryClick(category: SanityDocument) {
     
     <div class="c-blog__pagination">
         <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
-            <button class="button -outline" :class="{'-is-active': page === i}">{{ i }}</button>
+            <Button class="button -outline" :active="page === i" :number="i"></Button>
         </div>
     </div>
     </main>

@@ -34,16 +34,19 @@ defineProps({
     default: 'Connexion',
   },
 });
+
+
+
 </script>
 
 <template>
-  <section class="login">
+  <form class="login">
     <!-- Utilisation de l'alias /_nuxt pour les assets statiques dans Nuxt -->
     <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo">
     <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
     <div class="login__field">
       <input
-        type="text"
+        type="username" id="username"
         class="login__input login__input--text"
         :placeholder="usernamePlaceholder"
         aria-label="Nom d’utilisateur"
@@ -51,7 +54,8 @@ defineProps({
     </div>
     <div class="login__field">
       <input
-        type="password"
+       
+        type="password" id="password"
         class="login__input login__input--password"
         :placeholder="passwordPlaceholder"
         aria-label="Mot de passe"
@@ -59,6 +63,7 @@ defineProps({
     </div>
     <div class="login__actions">
       <Button
+        type="submit"
         class="button -connexion"
         :label="buttonLabel"
       />
@@ -67,7 +72,7 @@ defineProps({
         {{ alternateActionText }}
       </p>
     </div>
-  </section>
+  </form>
 </template>
 
 <style lang="scss">

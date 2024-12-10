@@ -3,6 +3,8 @@ defineProps<{
     disabled?: boolean;
     variant?: "primary" | "outline" ;
     label?: string
+    active?: boolean
+    number?: number
 }>();
 
 </script>
@@ -12,9 +14,11 @@ defineProps<{
 :class="{
         'button': true,
         '-outline': variant === 'outline',
-        '-disabled': disabled
+        '-disabled': disabled,
+        '-active': active
     }">
         {{label}}
+        {{ number }}
     </button>
 </template>
 
@@ -65,6 +69,11 @@ defineProps<{
         border-color: $gray100;
         color: $gray400;
         cursor: not-allowed;
+    }
+
+    &.-active {
+        background-color: $primaryColor;
+        color: $black;
     }
 
     &.-connexion {
