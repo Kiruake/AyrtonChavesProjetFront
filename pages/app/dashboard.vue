@@ -1,38 +1,28 @@
 <script setup>
 
-const globalHabits = ref([]);
-const personalHabits = ref([]);
 
-async function fetchData() {
-  try {
-    const response = await fetch('http://localhost:4000/dashboard', {
+
+const { data, error, refresh } = await useAsyncData(
+  'fetchDashboard', // Clé unique
+  () =>
+    $fetch('http://localhost:4000/dashboard', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${useCookie('api_tracking_jwt').value}`
-      }
-    });
-
-    if (!response.ok) {
-      console.error('Erreur lors de la récupération des données:', await response.json());
-      return;
-    }
-
-    const data = await response.json();
-    globalHabits.value = data.globalHabits || []; 
-    personalHabits.value = data.personalHabits || [];
-
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-onMounted(fetchData);
+        Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
+      },
+    })
+);
 
 const habitTitle = ref('');
 const habitDescription = ref('');
-const habitIsGloable = ref(false);
+const habitIsGlobal = ref(false);
 const feedbackMessage = ref('');
+
+
+const habitTitleEdit = ref('');
+const habitDescriptionEdit = ref('');
+const habitIsGlobalEdit = ref(false);
 
 async function addHabit() {
   try {
@@ -45,7 +35,7 @@ async function addHabit() {
       body: JSON.stringify({
         title: habitTitle.value,
         description: habitDescription.value,
-        is_global: habitIsGloable.value
+        is_global: habitIsGlobal.value
 
       })
     });
@@ -64,6 +54,7 @@ async function addHabit() {
     // Réinitialiser les champs du formulaire
     habitTitle.value = '';
     habitDescription.value = '';
+    refresh();
 } catch (error) {
     feedbackMessage.value = 'Erreur réseau ou interne';
     console.error('Erreur réseau ou interne:', error);
@@ -71,6 +62,7 @@ async function addHabit() {
 }
 
 const selectedHabit = ref(null);
+
 
 async function editHabit() {
   try {
@@ -82,9 +74,9 @@ async function editHabit() {
         'Authorization': `Bearer ${useCookie('api_tracking_jwt').value}`
       },
       body: JSON.stringify({
-        title: habitTitle.value,
-        description: habitDescription.value,
-        is_global: habitIsGloable.value,
+        title: habitTitleEdit.value,
+        description: habitDescriptionEdit.value,
+        is_global: habitIsGlobalEdit.value,
       }),
     });
 
@@ -95,19 +87,21 @@ async function editHabit() {
       return;
     }
 
-    const data = await response.json();
-    feedbackMessage.value = `Habitude modifiée : ${data.title}`;
+    const habit = await response.json();
+    feedbackMessage.value = `Habitude modifiée : ${habit.title}`;
    
   
-    const habitIndex = globalHabits.value.findIndex(h => h.id === selectedHabit.value.id);
+    const habitIndex = data.value.globalHabits.findIndex(h => h.id === selectedHabit.value.id);
     if (habitIndex !== -1) {
-      globalHabits.value[habitIndex] = data; 
+      data.value.globalHabits[habitIndex] = habit; 
     }
 
+    refresh();
+
     selectedHabit.value = null;
-    habitTitle.value = '';
-    habitDescription.value = '';
-    habitIsGloable.value = false;
+    habitTitleEdit.value = '';
+    habitDescriptionEdit.value = '';
+    habitIsGlobalEdit.value = false;
   } catch (error) {
     feedbackMessage.value = 'Erreur réseau ou interne';
     console.error('Erreur réseau ou interne:', error);
@@ -116,10 +110,46 @@ async function editHabit() {
 
 function selectHabitForEdit(habit) {
   selectedHabit.value = habit;
-  habitTitle.value = habit.title;
-  habitDescription.value = habit.description;
-  habitIsGloable.value = habit.is_global === 1;
+  habitTitleEdit.value = habit.title;
+  habitDescriptionEdit.value = habit.description;
+  habitIsGlobalEdit.value = habit.is_global === 1;
 }
+
+async function deleteHabit(habit) {
+  try {
+    const response = await fetch(`http://localhost:4000/habits/${habit.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${useCookie('api_tracking_jwt').value}`
+      }
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      feedbackMessage.value = `Erreur : ${error.message}`;
+      console.error('Erreur:', error);
+      return;
+    }
+
+    const EditHab = await response.json();
+    feedbackMessage.value = `Habitude supprimée`;
+
+    refresh();
+
+    const habitIndex = data.value.globalHabits.findIndex(h => h.id === habit.id);
+    if (habitIndex !== -1) {
+      data.value.globalHabits.splice(habitIndex, 1);
+    }
+
+  } catch (error) {
+    feedbackMessage.value = 'Erreur réseau ou interne';
+    console.error('Erreur réseau ou interne:', error);
+  }
+}
+
+
+
 
 </script>
 
@@ -134,7 +164,7 @@ function selectHabitForEdit(habit) {
   <div>
     <h2>Habitudes globales</h2>
     <ul>
-      <li v-for="habit in globalHabits" :key="habit.id">
+      <li v-for="habit in data.globalHabits" :key="habit.id">
         <h3>{{ habit.title }}</h3>
         <p>{{ habit.description }}</p>
       </li>
@@ -144,10 +174,11 @@ function selectHabitForEdit(habit) {
   <div>
     <h2>Habitudes personnelles</h2>
     <ul>
-      <li v-for="habit in personalHabits" :key="habit.id">
+      <li v-for="habit in data.personalHabits" :key="habit.id">
         <h3>{{ habit.title }}</h3>
         <p>{{ habit.description }}</p>
         <button @click="selectHabitForEdit(habit)">Modifier</button>
+        <button @click="deleteHabit(habit)">Supprimer</button>
       </li>
     </ul>
   </div>
@@ -160,7 +191,7 @@ function selectHabitForEdit(habit) {
         <label for="habitTitle">Titre :</label>
         <input
           id="habitTitle"
-          v-model="habitTitle"
+          v-model="habitTitleEdit"
           type="text"
           placeholder="Titre de l'habitude"
           required
@@ -170,16 +201,16 @@ function selectHabitForEdit(habit) {
         <label for="habitDescription">Description :</label>
         <textarea
           id="habitDescription"
-          v-model="habitDescription"
+          v-model="habitDescriptionEdit"
           placeholder="Description de l'habitude"
         ></textarea>
       </div>
 
       <div>
-        <label for="habitIsGloable">Rendre publique?</label>
+        <label for="habitIsGlobal">Rendre publique?</label>
         <input
-          id="habitIsGloable"
-          v-model="habitIsGloable"
+          id="habitIsGlobal"
+          v-model="habitIsGlobalEdit"
           type="checkbox"
         />
       </div>
@@ -213,10 +244,10 @@ function selectHabitForEdit(habit) {
       </div>
 
       <div>
-        <label for="habitIsGloable">Rendre publique?</label>    
+        <label for="habitIsGlobal">Rendre publique?</label>    
         <input
-          id="habitIsGloable"
-          v-model="habitIsGloable"
+          id="habitIsGlobal"
+          v-model="habitIsGlobal"
           type="checkbox"
         />
       </div>
