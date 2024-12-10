@@ -3,21 +3,12 @@
 
 
 const {data, refresh } = await useAsyncData('dashboard', async () => { 
-
-
-const response = await fetch(`http://localhost:4000/dashboard`, {
-    method: 'GET',
-    headers: {
-        Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`
-    }
+    return await useTrackingApi('/dashboard', {method:'GET'});
 });
 
-
-console.log('response : ', response);
-
-return  await response.json();
-});
-
+const habitTitle = ref('');
+const habitDescription = ref('');
+const habitIsGlobal = ref(false);
 const feedbackMessage = ref('');
 
 
@@ -121,6 +112,11 @@ function onHabitCreated() {
     refresh();
 }
 
+function onHabitUpdated() {
+    console.log('une habitude a été modifiée');
+    refresh();
+}
+
 </script>
 
 
@@ -153,45 +149,19 @@ function onHabitCreated() {
     </ul>
   </div>
 
-  <!-- Formulaire d'édition -->
-  <div v-if="selectedHabit">
-    <h2>Modifier une habitude</h2>
-    <form @submit.prevent="editHabit">
-      <div>
-        <label for="habitTitle">Titre :</label>
-        <input
-          id="habitTitle"
-          v-model="habitTitleEdit"
-          type="text"
-          placeholder="Titre de l'habitude"
-          required
-        />
-      </div>
-      <div>
-        <label for="habitDescription">Description :</label>
-        <textarea
-          id="habitDescription"
-          v-model="habitDescriptionEdit"
-          placeholder="Description de l'habitude"
-        ></textarea>
-      </div>
-
-      <div>
-        <label for="habitIsGlobal">Rendre publique?</label>
-        <input
-          id="habitIsGlobal"
-          v-model="habitIsGlobalEdit"
-          type="checkbox"
-        />
-      </div>
-
-      <button type="submit">Modifier</button>
-      <button type="button" @click="selectedHabit = null">Annuler</button>
-    </form>
-  </div>
-
-
+  
   <AddHabitForm @habit:created="onHabitCreated" />
+
+  <EditHabitForm
+  v-if="selectedHabit"
+  :id="selectedHabit.id"
+  :title="selectedHabit.title"
+  :description="selectedHabit.description"
+  :is_global="selectedHabit.is_global === 1" 
+  @cancel="selectedHabit = null"
+  @habit:updated="onHabitUpdated"
+/>
+
 
 
 

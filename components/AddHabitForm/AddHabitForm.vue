@@ -8,6 +8,7 @@ const feedbackMessage = ref('');
 const emit = defineEmits(['habit:created']);
 async function addHabit() {
   try {
+    
     const response = await fetch('http://localhost:4000/habits', {
       method: 'POST',
       headers: {
