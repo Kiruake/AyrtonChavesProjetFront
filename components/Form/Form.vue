@@ -15,8 +15,7 @@ const alternateActionText = computed(() =>
     : "Vous n’avez pas de compte ? S’inscrire"
 );
 
-// Props pour le composant
-defineProps({
+const props = defineProps({
   showTitle: {
     type: Boolean,
     default: true,
@@ -33,15 +32,25 @@ defineProps({
     type: String,
     default: 'Connexion',
   },
+  action: {
+    type: String as () => 'login' | 'signup',
+    required: true, 
+  },
 });
 
 const username = ref('');
 const password = ref('');
 
+const router = useRouter();
+
 async function onSubmit(event: Event) {
-  event.preventDefault(); // Empêche le rechargement de la page
+  event.preventDefault(); 
   
-  const response = await fetch('http://localhost:4000/auth/register', {
+  try {
+    
+  const route = props.action === 'signup' ? 'auth/register' : 'auth/login'
+
+  const response = await fetch(`http://localhost:4000/${route}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,8 +68,15 @@ async function onSubmit(event: Event) {
   console.log(data);
   const cookieJwt = useCookie('api_tracking_jwt');
   cookieJwt.value = data.token
+
+  await router.push('/app/dashboard');
   
+} catch (error) {
+    console.error(error);
 }
+}
+
+
 
 
 </script>

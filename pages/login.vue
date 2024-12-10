@@ -14,7 +14,7 @@ definePageMeta({
   </video>
   </div>
 
-<Form :title="'Connexion'"/>
+<Form v-bind="{action: 'login'}"  :title="'Connexion'"/>
 
 
   </main>
