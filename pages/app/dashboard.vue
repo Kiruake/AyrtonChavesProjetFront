@@ -1,6 +1,7 @@
 <script setup>
 
 const globalHabits = ref([]);
+const personalHabits = ref([]);
 
 async function fetchData() {
   try {
@@ -19,6 +20,7 @@ async function fetchData() {
 
     const data = await response.json();
     globalHabits.value = data.globalHabits || []; 
+    personalHabits.value = data.personalHabits || [];
 
   } catch (error) {
     console.error(error);
@@ -54,20 +56,22 @@ async function addHabit() {
       console.error('Erreur:', error);
       return;
     }
-
+    
     const data = await response.json();
     feedbackMessage.value = `Habitude ajoutée : ${data.title}`;
     console.log('Succès:', data);
-
+    
     // Réinitialiser les champs du formulaire
     habitTitle.value = '';
     habitDescription.value = '';
-  } catch (error) {
+} catch (error) {
     feedbackMessage.value = 'Erreur réseau ou interne';
     console.error('Erreur réseau ou interne:', error);
-  }
 }
+}
+
 </script>
+
 
 
 
@@ -80,6 +84,16 @@ async function addHabit() {
     <h2>Habitudes globales</h2>
     <ul>
       <li v-for="habit in globalHabits" :key="habit.id">
+        <h3>{{ habit.title }}</h3>
+        <p>{{ habit.description }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Habitudes personlles</h2>
+    <ul>
+      <li v-for="habit in personalHabits" :key="habit.id">
         <h3>{{ habit.title }}</h3>
         <p>{{ habit.description }}</p>
       </li>
@@ -114,7 +128,6 @@ async function addHabit() {
           id="habitIsGloable"
           v-model="habitIsGloable"
           type="checkbox"
-          required
         />
       </div>
 
