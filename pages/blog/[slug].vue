@@ -1,9 +1,6 @@
 <script setup lang="ts">
 
 import type { SanityDocument } from "@sanity/client";
-import { url } from "inspector";
-
-
 
 
 const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
