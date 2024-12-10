@@ -17,6 +17,10 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         value,
         text
       }
+    },
+    features{
+      title,
+      text
     }
   }
 `);
@@ -59,6 +63,18 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         </ul>
       </div>
     </section>
+
+
+<section class="features">
+    <div class="features__container">
+      <div class="features__content">
+        <h2 class="features__title">{{ homepage?.features.title }}</h2>
+        <p class="features__description">{{ homepage?.features.text }}</p>
+      </div>
+    </div>
+</section>
+
+
   </main>
 </template>
 
@@ -150,5 +166,31 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
   }
 }
 
+.features {
+  background-color: $thirdColor;
+  padding: 4rem 0;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: $fontTitleFamily;
+  }
+
+  &__description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-family: $fontTitleFamily;
+  }
+}
 
 </style>
