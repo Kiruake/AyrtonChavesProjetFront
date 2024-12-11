@@ -41,13 +41,7 @@ function onHabitDeleted() {
 <h1>Dashboard</h1>
 
   <div>
-    <h2>Habitudes globales</h2>
-    <ul>
-      <li v-for="habit in data.globalHabits" :key="habit.id">
-        <h3>{{ habit.title }}</h3>
-        <p>{{ habit.description }}</p>
-      </li>
-    </ul>
+    <GlobalHabitsList :habits="data.globalHabits" />
   </div>
 
   <div>

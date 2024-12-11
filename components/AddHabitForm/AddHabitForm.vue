@@ -61,6 +61,12 @@ async function addHabit() {
                 <label for="description">Description</label>
                 <input id="description" v-model="habitDescription" type="text"  placeholder="Entrez la description de la Habitude">
             </div>
+
+            <div class="c-add-habit-formgroup">
+                <label for="is_global">Habitude Globale</label>
+                <input id="is_global" v-model="habitIsGlobal" type="checkbox">
+            </div>
+
             <Button >Ajouter</Button>
         </form>
     </div>

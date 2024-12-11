@@ -17,21 +17,19 @@ console.log('response : ', response);
 return  await response.json();
 });
 
-const habitTitle = ref('');
-const habitDescription = ref('');
-const habitIsGlobal = ref(false);
 </script>
 
 <template>
-  <div class="c-global-habits-list">
+   <div>
     <h2>Habitudes globales</h2>
     <ul>
-      <li v-for="habit in habits" :key="habit.id">
+      <li v-for="habit in data.globalHabits" :key="habit.id">
         <h3>{{ habit.title }}</h3>
         <p>{{ habit.description }}</p>
       </li>
     </ul>
   </div>
+
 </template>
 
 <style lang="scss">
