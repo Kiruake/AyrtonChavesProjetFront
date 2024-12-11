@@ -1,12 +1,8 @@
 <script setup lang="ts">
+import type { PersonalHabit } from '~/@types/dashboard';
 
 // Définir les props avec le type attendu
-const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  }
-});
+const props = defineProps<{ id: PersonalHabit['id'] }>();
 
 // Définir les événements émis
 const emit = defineEmits(['habit:delete']);
