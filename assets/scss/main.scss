@@ -4,9 +4,9 @@
 @use 'fundations/fonts';
 
 body{
-background-color: $thirdColor;
+background-color: white;
 margin: 0;
-font-family: 'Montserrat', sans serif;
+font-family: $fontTextFamily
 }
 
 a:-webkit-any-link {

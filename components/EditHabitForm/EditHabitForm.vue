@@ -1,24 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import type { PersonalHabit } from '~/@types/dashboard';
 
 // Définition des props
-const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  is_global: {
-    type: Boolean,
-  },
-});
+const props = defineProps<PersonalHabit>();
 
 // Déclaration des événements
 const emit = defineEmits(['habit:updated', 'cancel']);

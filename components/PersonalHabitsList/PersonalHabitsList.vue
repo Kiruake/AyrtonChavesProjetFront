@@ -1,78 +1,64 @@
-<script setup>
+<script setup lang="ts">
+import type { PersonalHabit } from '~/@types/dashboard';
+defineProps<{ habits: PersonalHabit[] }>();
 
-const {data, refresh } = await useAsyncData('dashboard', async () => { 
-    return await useTrackingApi('/dashboard', {method:'GET'});
-});
+const emit = defineEmits([
+  'edit',           
+  'habit:created',  
+  'habit:updated',  
+  'habit:deleted',  
+  'tracking:updated' // Pour signaler le suivi d'une habitude
+]);
 
-
-const habitTitleEdit = ref('');
-const habitDescriptionEdit = ref('');
-const habitIsGlobalEdit = ref(false);
-
-const selectedHabit = ref(null);
-function selectHabitForEdit(habit) {
-  selectedHabit.value = habit;
-  habitTitleEdit.value = habit.title;
-  habitDescriptionEdit.value = habit.description;
-  habitIsGlobalEdit.value = habit.is_global === 1;
+function handleEdit(habit: PersonalHabit) {
+  emit('edit', habit);
 }
 
-
-function onHabitCreated() {
-    console.log('une nouvelle habitude a été créée');
-    refresh();
+function handleHabitDeleted(habitId: PersonalHabit['id']) {
+  emit('habit:deleted', habitId);
 }
 
-function onHabitUpdated() {
-    console.log('une habitude a été modifiée');
-    refresh();
+function handleTrackingUpdated(habitId: PersonalHabit['id']) {
+  emit('tracking:updated', habitId);
 }
 
-function onHabitDeleted() {
-    console.log('une habitude a été suprimmée');
-    refresh();
+function handleHabitUpdated () {
+  emit('habit:updated');
 }
-
 </script>
 
 <template>
-<main>
-<h1>Dashboard</h1>
-
-  <div>
+  <div class="personal-habits-list">
     <h2>Habitudes personnelles</h2>
     <ul>
-      <li v-for="habit in data.personalHabits" :key="habit.id">
-        <h3>{{ habit.title }}</h3>
+      <li v-for="habit in habits" :key="habit.id" class="habit-item">
+        <h3>{{habit.title }}</h3>
         <p>{{ habit.description }}</p>
-        <button @click="selectHabitForEdit(habit)">Modifier</button>
+       
+        <button @click="handleEdit(habit)">Modifier</button>
+
+        <EditHabitForm v-bind="habit" @habit:updated="handleHabitUpdated" />
+
         <DeleteHabit
-            :id="habit.id"
-            @habit:delete="onHabitDeleted"
-          />
+          :id="habit.id"
+          @habit:delete="handleHabitDeleted"
+        />
+       
+        <HabitTracking
+          :habit-id="habit.id"
+          @tracking:updated="handleTrackingUpdated"
+        />
+      
+        <HabitHistory
+          :habit-id="habit.id"
+          :habit-title="habit.title"
+        />
       </li>
     </ul>
+    <AddHabitForm />
   </div>
-
-  
-  <AddHabitForm @habit:created="onHabitCreated" />
-
-  <EditHabitForm
-  v-if="selectedHabit"
-  :id="selectedHabit.id"
-  :title="selectedHabit.title"
-  :description="selectedHabit.description"
-  :is_global="selectedHabit.is_global === 1" 
-  @cancel="selectedHabit = null"
-  @habit:updated="onHabitUpdated"
-/>
-
-
-
-
-
-</main>
 </template>
+
 
 
 
