@@ -86,15 +86,15 @@ async function editHabit() {
     <form @submit.prevent="editHabit">
       <div>
         <label for="title">Titre</label>
-        <input id="title" v-model="habitTitleEdit" type="text" placeholder="Titre de l'habitude" />
+        <input id="title" v-model="habitTitleEdit" type="text" placeholder="Titre de l'habitude" >
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea id="description" v-model="habitDescriptionEdit" placeholder="Description"></textarea>
+        <textarea id="description" v-model="habitDescriptionEdit" placeholder="Description"/>
       </div>
       <div>
         <label for="isGlobal">Rendre publique?</label>
-        <input id="isGlobal" v-model="habitIsGlobalEdit" type="checkbox" />
+        <input id="isGlobal" v-model="habitIsGlobalEdit" type="checkbox" >
       </div>
       <div>
         <p v-if="feedbackMessage" class="feedback-message">{{ feedbackMessage }}</p>

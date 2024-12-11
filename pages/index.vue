@@ -39,8 +39,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
           loop 
           muted 
           playsinline 
-          class="hero__video">
-        </video>
+          class="hero__video"/>
       </div>
 
       <!-- Contenu centré (Titre et Texte) -->

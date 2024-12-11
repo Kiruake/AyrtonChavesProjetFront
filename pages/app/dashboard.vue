@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const {data, refresh } = await useAsyncData('dashboard', async () => { 
+const {data} = await useAsyncData('dashboard', async () => { 
     return await useTrackingApi('/dashboard', {method:'GET'});
 });
 

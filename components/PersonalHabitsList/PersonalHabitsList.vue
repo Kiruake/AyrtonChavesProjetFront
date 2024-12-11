@@ -4,7 +4,6 @@ const {data, refresh } = await useAsyncData('dashboard', async () => {
     return await useTrackingApi('/dashboard', {method:'GET'});
 });
 
-const feedbackMessage = ref('');
 
 const habitTitleEdit = ref('');
 const habitDescriptionEdit = ref('');

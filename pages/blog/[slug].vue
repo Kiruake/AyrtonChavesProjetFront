@@ -48,7 +48,7 @@ useSeoMeta({
 
         <p class="blog-slug__content"><SanityContent :blocks="post.body" /></p>
 
-        <SanityImage class="blog-slug__image" v-if="post.image" :asset-id="post.image.asset._ref" />
+        <SanityImage v-if="post.image" class="blog-slug__image" :asset-id="post.image.asset._ref" />
       </div>
  
     </main>

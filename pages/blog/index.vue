@@ -65,8 +65,8 @@ function onCategoryClick(category: SanityDocument) {
         <h1 class="a-title">Tous les articles</h1>
 
         <div class="c-categories">
-        <div :class="['c-categories__item' , {'-is-active': filter === category.slug.current}]" v-for="category in categories" :key="category._id" @click="onCategoryClick(category)">
-            <Button class="button -outline" :label="category.title" :active="filter === category.slug.current"></Button>
+        <div v-for="category in categories" :key="category._id" :class="['c-categories__item' , {'-is-active': filter === category.slug.current}]" @click="onCategoryClick(category)">
+            <Button class="button -outline" :label="category.title" :active="filter === category.slug.current"/>
         </div>
         </div>
 
@@ -79,12 +79,12 @@ function onCategoryClick(category: SanityDocument) {
             </NuxtLink>
             </div>
 
-            <img class="c-blog__image" v-if="post.image" :src="urlFor(post.image)?.url()">  
+            <img v-if="post.image" class="c-blog__image" :src="urlFor(post.image)?.url()">  
             <div v-else>Pas d'image</div>     
 
             <div class="c-blog__categories">
             <div v-for="category in post.categories" :key="category._id">
-                <Button class="button -small -blog" :label="category.title"></Button>
+                <Button class="button -small -blog" :label="category.title"/>
             </div>
             </div>
         </div>
@@ -95,7 +95,7 @@ function onCategoryClick(category: SanityDocument) {
     
     <div class="c-blog__pagination">
         <div v-for="i in NbMaxPages" :key="i" @click="onPageClick(i)">
-            <Button class="button -outline" :active="page === i" :number="i"></Button>
+            <Button class="button -outline" :active="page === i" :number="i"/>
         </div>
     </div>
     </main>

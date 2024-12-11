@@ -23,7 +23,8 @@ export default async function (endpoint: string, {method, body}: { method: 'GET'
         return await response.json()
 
     } catch (err) {
-return null;
+        console.error(err);
+        return null;
     }
 
 }

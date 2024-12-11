@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const {data, refresh } = await useAsyncData('dashboard', async () => { 
+const {data} = await useAsyncData('dashboard', async () => { 
 
 
 const response = await fetch(`http://localhost:4000/dashboard`, {
