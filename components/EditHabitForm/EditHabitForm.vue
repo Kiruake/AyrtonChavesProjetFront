@@ -17,7 +17,6 @@ const props = defineProps({
   },
   is_global: {
     type: Boolean,
-    required: true,
   },
 });
 
@@ -44,6 +43,11 @@ const feedbackMessage = ref('');
 
 async function editHabit() {
   try {
+    console.log({
+        title: habitTitleEdit.value,
+        description: habitDescriptionEdit.value,
+        is_global: habitIsGlobalEdit.value,
+      })
     const response = await fetch(`http://localhost:4000/habits/${props.id}`, {
       method: 'PUT',
       headers: {
@@ -53,7 +57,7 @@ async function editHabit() {
       body: JSON.stringify({
         title: habitTitleEdit.value,
         description: habitDescriptionEdit.value,
-        is_global: habitIsGlobalEdit.value,
+        is_global: habitIsGlobalEdit.value ? 1 : 0,
       }),
     });
 
