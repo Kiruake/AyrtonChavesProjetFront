@@ -2,12 +2,15 @@
 import type { PersonalHabit } from '~/@types/dashboard';
 defineProps<{ habits: PersonalHabit[] }>();
 
+const number = ref(0)
+
 const emit = defineEmits([
   'edit',           
   'habit:created',  
   'habit:updated',  
   'habit:deleted',  
-  'tracking:updated' // Pour signaler le suivi d'une habitude
+  'tracking:updated',
+  'tracking:history'
 ]);
 
 function handleEdit(habit: PersonalHabit) {
@@ -24,6 +27,10 @@ function handleTrackingUpdated(habitId: PersonalHabit['id']) {
 
 function handleHabitUpdated () {
   emit('habit:updated');
+}
+
+function handleHabitHistory () {
+  emit('tracking:history');
 }
 </script>
 
@@ -52,10 +59,11 @@ function handleHabitUpdated () {
         <HabitHistory
           :habit-id="habit.id"
           :habit-title="habit.title"
+          @tracking:history="handleHabitHistory"
         />
       </li>
     </ul>
-    <AddHabitForm />
+    <AddHabitForm @habit:created="handleHabitUpdated" />
   </div>
 </template>
 

@@ -132,10 +132,10 @@ async function onSubmit(event: Event) {
   }
 
   &__title {
-    font-size: $fontTitleSize;
+    font-size: 24px;
     margin-bottom: 60px;
-    color: $primaryColor;
-    font-family: $fontTitleFamily;
+    color: blue;
+    font-family: 24px;
   }
 
   &__field {
@@ -147,34 +147,34 @@ async function onSubmit(event: Event) {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: $fontTextSize;
-    font-family: $fontTextFamily;
+    font-size: 14px;
+    font-family: 12px
 
     &--text {
-      font-size: $fontTextSize;
+      font-size: 14px;
     }
 
     &--password {
-      font-size: $fontTextSize;
+      font-size: 14px;
     }
 
     &:focus {
-      border-color: $gray800;
+      border-color: grey;
       outline: none;
     }
   }
 
   &__alternate-action {
     margin-top: 30px;
-    font-size: $fontTextSize;
-    color: $gray800;
-    font-family: $fontTextFamily;
+    font-size: 14px;
+    color: grey;
+    font-family: 12px;
     cursor: pointer;
     font-weight: 700;
     text-decoration: underline;
 
     &:hover {
-      color: $primaryColor;
+      color: blue;
     }
   }
 }

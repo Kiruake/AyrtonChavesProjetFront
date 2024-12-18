@@ -41,7 +41,7 @@ async function fetchTrackingHistory() {
 
     const result = await response.json();
     trackingHistory.value = result.trackings;
-    emit('tracking:history', result);
+    emit('tracking:history', );
   } catch (error) {
     errorMessage.value = 'Erreur réseau ou interne';
     console.error('Erreur réseau ou interne:', error);
@@ -75,7 +75,7 @@ function toggleHistoryVisibility() {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .history {
   margin-top: 10px;
   background: #f8f9fa;

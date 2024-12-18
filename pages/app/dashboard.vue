@@ -36,6 +36,11 @@ function OnHabitTracking() {
     console.log('une habitude a été suivie');
     refresh();
 }
+
+function OnHabitHistory() {
+    console.log('une habitude a besoin d\'un historique');
+    refresh();
+}
 </script>
 
 <template>
@@ -52,6 +57,7 @@ function OnHabitTracking() {
       @habit:updated="onHabitUpdated"
       @habit:deleted="onHabitDeleted"
       @tracking:updated="OnHabitTracking"
+      @tracking:history="OnHabitHistory"
     />
   </div>
 </main>
