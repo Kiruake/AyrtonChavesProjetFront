@@ -73,4 +73,83 @@ async function addHabit() {
 </template>
 
 <style lang="scss">
+
+.c-add-habit-form {
+  background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    width: 400px;
+
+  & > h2 {
+    color: #333333;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .c-add-habit-formgroup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-size: 0.875rem;
+        color: #555555;
+        font-weight: 500;
+      }
+
+      input[type='text'] {
+        padding: 0.75rem;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+          border-color: #007bff;
+          box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+          outline: none;
+        }
+      }
+
+      input[type='checkbox'] {
+        width: 16px;
+        height: 16px;
+        accent-color: #007bff;
+      }
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
 </style>
