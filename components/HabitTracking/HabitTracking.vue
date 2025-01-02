@@ -45,30 +45,28 @@ async function trackHabit() {
 </script>
 
 <template>
-  <div>
-    <button @click="trackHabit">Enregistrer le suivi</button>
-    <p v-if="trackingMessage">{{ trackingMessage }}</p>
+  <div class="c-habit-tracking">
+    <button class="c-habit-tracking__button" @click="trackHabit">Enregistrer</button>
   </div>
 </template>
 
 <style scoped lang="scss">
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #0056b3;
-  }
+
+   
+
+      button {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
 }
 
-p {
-  color: green;
-  margin-top: 10px;
-  font-size: 14px;
-}
 </style>

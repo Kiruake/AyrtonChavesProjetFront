@@ -20,9 +20,11 @@ defineProps<{ habits: GlobalHabit[] }>();
   </div>
 
   <div class="fixed-button">
+    <NuxtLink to="/app/customhabits" class="fixed-button__link">
       <button class="fixed-button__btn">
         <p>Custom habits</p>
       </button>
+    </NuxtLink>
     </div>
 
 </template>
