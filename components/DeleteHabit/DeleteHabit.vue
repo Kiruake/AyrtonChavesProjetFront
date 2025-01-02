@@ -47,22 +47,8 @@ async function deleteHabit() {
 
 <template>
   <div>
-    <button class="delete-button" @click="deleteHabit">Supprimer</button>
-
-    <p v-if="feedbackMessage">{{ feedbackMessage }}</p>
+    <ButtonCardHabit variant="red" label="Supprimer" @click="deleteHabit"/>
   </div>
 </template>
 
-<style>
 
-.delete-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-</style>

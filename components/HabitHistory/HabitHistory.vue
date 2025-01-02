@@ -59,9 +59,9 @@ function toggleHistoryVisibility() {
 
 <template>
   <div class="tracking-history">
-    <button class="tracking-history__toggle-button" @click="toggleHistoryVisibility">
+    <ButtonCardHabit variant="primary" label="Historique"  @click="toggleHistoryVisibility">
       {{ isHistoryVisible ? 'Masquer l\'historique' : 'Voir l\'historique' }}
-    </button>
+    </ButtonCardHabit>
     <div v-if="isHistoryVisible" class="tracking-history__content">
       <ul v-if="trackingHistory.length" class="tracking-history__list">
         <li v-for="record in trackingHistory" :key="record.date" class="tracking-history__item">
