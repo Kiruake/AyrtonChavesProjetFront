@@ -45,28 +45,9 @@ async function trackHabit() {
 </script>
 
 <template>
-  <div class="c-habit-tracking">
-    <button class="c-habit-tracking__button" @click="trackHabit">Enregistrer</button>
+  <div>
+    <ButtonCardHabit variant="green" label="Enregistrer" @click="trackHabit"/>
   </div>
 </template>
 
-<style scoped lang="scss">
 
-
-   
-
-      button {
-        background-color: green;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:hover {
-          background-color: #0056b3;
-        }
-}
-
-</style>
