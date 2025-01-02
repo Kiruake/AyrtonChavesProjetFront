@@ -47,7 +47,7 @@ async function deleteHabit() {
 
 <template>
   <div>
-    <button @click="deleteHabit" class="delete-button">Supprimer</button>
+    <button class="delete-button" @click="deleteHabit">Supprimer</button>
 
     <p v-if="feedbackMessage">{{ feedbackMessage }}</p>
   </div>

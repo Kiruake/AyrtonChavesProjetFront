@@ -5,9 +5,7 @@
 <template>
   <main>
 
-  <div class="homepage">
- 
-  </div>
+  <div class="homepage"/>
 
 <Form v-bind="{action: 'login'}"  :title="'Connexion'"/>
 

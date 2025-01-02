@@ -72,11 +72,11 @@ function toggleEditVisibility() {
   <div class="edit-habit">
     <!-- Bouton pour afficher/masquer le formulaire -->
     <img 
-      @click="toggleEditVisibility" 
-      :src="isEditVisible ? '/icons/RedCrossIcon.png' : '/icons/editIcon.png'"
-      :alt="isEditVisible ? 'Masquer le formulaire' : 'Modifier'" 
+      :src="isEditVisible ? '/icons/RedCrossIcon.png' : '/icons/editIcon.png'" 
+      :alt="isEditVisible ? 'Masquer le formulaire' : 'Modifier'"
       :class="['edit-habit__toggle-icon', { 'edit-habit__toggle-icon--active': isEditVisible }]" 
-    />
+      @click="toggleEditVisibility" 
+    >
 
     <!-- Transition pour animer l'ouverture/fermeture du formulaire -->
     <transition name="fade">
@@ -85,15 +85,15 @@ function toggleEditVisibility() {
         <form class="edit-habit__form" @submit.prevent="editHabit">
           <div class="edit-habit__field">
             <label class="edit-habit__label" for="title">Titre</label>
-            <input class="edit-habit__input" id="title" v-model="habitTitleEdit" type="text" placeholder="Titre de l'habitude" />
+            <input id="title" v-model="habitTitleEdit" class="edit-habit__input" type="text" placeholder="Titre de l'habitude" >
           </div>
           <div class="edit-habit__field">
             <label class="edit-habit__label" for="description">Description</label>
-            <textarea class="edit-habit__textarea" id="description" v-model="habitDescriptionEdit" placeholder="Description"></textarea>
+            <textarea id="description" v-model="habitDescriptionEdit" class="edit-habit__textarea" placeholder="Description"/>
           </div>
           <div class="edit-habit__field">
             <label class="edit-habit__label" for="isGlobal">Rendre publique?</label>
-            <input class="edit-habit__checkbox" id="isGlobal" v-model="habitIsGlobalEdit" type="checkbox" />
+            <input id="isGlobal" v-model="habitIsGlobalEdit" class="edit-habit__checkbox" type="checkbox" >
           </div>
           <div>
             <p v-if="feedbackMessage" class="edit-habit__feedback">{{ feedbackMessage }}</p>

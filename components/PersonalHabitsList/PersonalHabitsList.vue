@@ -13,9 +13,6 @@ const emit = defineEmits([
   'tracking:history'
 ]);
 
-function handleEdit(habit: PersonalHabit) {
-  emit('edit', habit);
-}
 
 function handleHabitDeleted(habitId: PersonalHabit['id']) {
   emit('habit:deleted', habitId);
