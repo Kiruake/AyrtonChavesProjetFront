@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
     disabled?: boolean;
-    variant?: "primary" | "outline" ;
+    variant?: "primary" | "outline" | "orange";
     label?: string
     active?: boolean
     number?: number
@@ -14,6 +14,7 @@ defineProps<{
 :class="{
         'button': true,
         '-outline': variant === 'outline',
+        '-orange': variant === 'orange',
         '-disabled': disabled,
         '-active': active
     }">
@@ -34,9 +35,6 @@ defineProps<{
     text-decoration: none;
     cursor: pointer;
 
-    &:hover {
-        background: $primaryDarkColor;
-    }
 
     &.-center {
        margin: auto;
@@ -47,7 +45,16 @@ defineProps<{
             color: $primaryColor;
         }
     }
+    &.-orange {
+    background: orange;
+    color: $primaryColor;
 
+    &:hover {
+        background-color: $primaryColor;
+        color: white;
+    }
+
+    
     &.-outline {
         background: transparent;
         color: $primaryColor;
@@ -56,6 +63,9 @@ defineProps<{
             background-color: $primaryColor;
             color: $black;
         }
+
+
+    }
 
         &.-disabled {
             background: transparent;
@@ -72,8 +82,8 @@ defineProps<{
     }
 
     &.-active {
-        background-color: $primaryColor;
-        color: $black;
+        background-color: orange;
+        color: white;
     }
 
     &.-connexion {
@@ -82,15 +92,22 @@ defineProps<{
 
     &.-small {
         padding: rem(8px) rem(16px);
+        background: orange;
+        color : $primaryColor;
 
         &:hover {
             background-color: $primaryColor;
-            color: $black;
+        color: white;
         }
 
         &.-blog {
             position: relative;
-            top: -80px;
+            top: -60px;
+        }
+
+        &.-blogslug{
+            position: relative;
+            margin-bottom: 1rem;
         }
     }
 }

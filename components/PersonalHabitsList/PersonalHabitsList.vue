@@ -116,7 +116,7 @@ function handleHabitHistory() {
         margin-bottom: 1rem;
 
         .habit-card {
-          background: #f1f7f7;
+          background: white;
           padding: 1rem;
           border-radius: 8px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -163,7 +163,6 @@ function handleHabitHistory() {
   .content-right {
     flex: 0 0 auto;
     padding: 1rem;
-    background-color: #ffffff;
     border-top: 1px solid #e5e5e5;
 
     .add-habit-form {

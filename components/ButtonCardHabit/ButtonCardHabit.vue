@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
-    variant?: "primary" | "green" | "red" ;
+    variant?: "primary" | "green" | "red" | "orange";
     label?: string
 
 }>();
@@ -13,6 +13,7 @@ defineProps<{
         'button': true,
         '-green': variant === 'green',
         '-red': variant === 'red',
+        '-orange': variant === 'orange',
         '-primary': variant === 'primary'
     }">
         {{label}}
@@ -49,8 +50,7 @@ defineProps<{
         color: white;
 
         &:hover {
-            background-color: lightgreen;
-            color: $black;
+            background-color: rgb(6, 101, 6);
         }
 
     }
@@ -59,6 +59,19 @@ defineProps<{
         background-color: red;
         color: white;
 
+        &:hover {
+            background-color: rgb(201, 7, 7);
+        }
+
+    }
+
+    &.-orange {
+        background-color: orange;
+        color: white;
+
+        &:hover {
+            background-color:rgb(239, 180, 68);
+        }
 
     }
 
