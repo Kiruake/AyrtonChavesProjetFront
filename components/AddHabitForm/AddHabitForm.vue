@@ -151,6 +151,7 @@ async function addHabit() {
       }
     }
   }
+
 }
 
 </style>
