@@ -98,7 +98,7 @@ function toggleEditVisibility() {
           <div>
             <p v-if="feedbackMessage" class="edit-habit__feedback">{{ feedbackMessage }}</p>
           </div>
-          <button class="edit-habit__submit" type="submit">Valider</button>
+          <ButtonCardHabit variant="primary" label="Valider" type="submit" />
         </form>
       </div>
     </transition>
@@ -190,22 +190,6 @@ function toggleEditVisibility() {
   &__checkbox {
     width: auto;
     margin-right: 0.5rem;
-  }
-
-  &__submit {
-    padding: 0.8rem 1.5rem;
-    background-color: #007bff;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #0056b3;
-    }
   }
 
   &__feedback {
