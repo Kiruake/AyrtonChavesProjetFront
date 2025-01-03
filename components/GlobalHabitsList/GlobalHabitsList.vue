@@ -20,7 +20,7 @@ defineProps<{ habits: GlobalHabit[] }>();
   </div>
 
   <div class="fixed-button">
-    <NuxtLink to="/app/customhabits" class="fixed-button__link">
+    <NuxtLink to="/app/dashboard" class="fixed-button__link">
       <button class="fixed-button__btn">
         <p>Custom habits</p>
       </button>
@@ -30,13 +30,6 @@ defineProps<{ habits: GlobalHabit[] }>();
 </template>
 
 <style lang="scss">
-
-$text-color: #333;
-$border-radius: 8px;
-$font-stack: 'Inter', sans-serif;
-
-// Styles de base
-
 
 .head {
   display: block;
@@ -102,7 +95,7 @@ $font-stack: 'Inter', sans-serif;
     background-color: #F1F7F7;
     margin-bottom: 1rem;
     padding: 1rem;
-    border-radius: $border-radius;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 
@@ -176,9 +169,6 @@ $font-stack: 'Inter', sans-serif;
     }
   }
 }
-
-
-
 
 
 </style>

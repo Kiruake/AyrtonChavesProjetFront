@@ -11,17 +11,16 @@ const toggleMenu = () => {
 <template>
   <header class="header">
     <div class="header__container">
-      <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo" >
+      <NuxtLink to="/" class="header__logo-link">
+        <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo" >
+      </NuxtLink>
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
           <li class="header__item">
-         <a href="#" class="header__link">Mes habitudes</a>
+         <NuxtLink to="/app/dashboard" class="header__link">Dashboard</NuxtLink>
           </li>
           <li class="header__item">
-           <NuxtLink to="/addhabits" > <a href="#" class="header__link">Ajouter une habitude</a></NuxtLink>
-          </li>
-          <li class="header__item">
-           <a href="#" class="header__link">Historique</a>
+         <NuxtLink to="/app/communaute" class="header__link">Communauté</NuxtLink>
           </li>
           <li class="header__item">
             <NuxtLink to="/login" ><a href="#" class="header__link">Connexion</a></NuxtLink> 
@@ -61,11 +60,11 @@ const toggleMenu = () => {
   }
 
   &__logo {
-    width: 50%;
+
     max-width: 150px;
 
     @include large-up {
-      width: 15%;
+     
     }
   }
 
@@ -128,7 +127,7 @@ const toggleMenu = () => {
     font-family: 'Nunito', sans-serif;
 
     &:hover {
-      color: $thirdColor;
+      color: orange;
     }
 
     @include large-up {

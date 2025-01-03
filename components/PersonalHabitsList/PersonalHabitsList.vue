@@ -34,7 +34,10 @@ function handleHabitHistory() {
 <template>
   <div class="personal-habits-container">
     <div class="content-left">
-      <h2>DASHBOARD</h2>
+      <h2 class="content-left__title">DASHBOARD</h2>
+      <div v-if="!habits.length" class="content-left__message">
+        <p>Vous n'avez pas encore d'habitudes enregistrées</p>
+      </div>
       <ul class="habit-list">
         <li v-for="habit in habits" :key="habit.id" class="habit-item">
           <div class="habit-card">
@@ -88,12 +91,20 @@ function handleHabitHistory() {
     flex: 1;
     overflow-y: auto;
     padding: 1rem;
-    background-color: #f9f9f9;
 
-    .title {
-      font-size: 1.5rem;
-      color: #333;
+    &__title {
+      font-family: $fontTitleFamily;
+      color: orange;
+      margin-top:0;
+      font-size: 3rem;
       margin-bottom: 1rem;
+    }
+
+    &__message {
+      text-align: center;
+      margin-top: 15rem;
+      font-size: 1.5rem;
+      font-family: $fontTitleFamily;
     }
 
     .habit-list {
@@ -266,8 +277,8 @@ function handleHabitHistory() {
   border-top: none;
   border-left: 1px solid #e5e5e5;
   height: 100vh;
-  margin-top: 10rem;
   padding: 2rem;
+  padding-top: 10rem;
 }
   }
 }

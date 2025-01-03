@@ -65,7 +65,7 @@ function toggleHistoryVisibility() {
     <div v-if="isHistoryVisible" class="tracking-history__content">
       <ul v-if="trackingHistory.length" class="tracking-history__list">
         <li v-for="record in trackingHistory" :key="record.date" class="tracking-history__item">
-          Date : {{ new Date(record.date).toLocaleDateString() }}
+          Habitude effectué le {{ new Date(record.date).toLocaleDateString() }}
         </li>
       </ul>
       <p v-else class="tracking-history__message">Aucun suivi enregistré pour cette habitude.</p>
@@ -82,19 +82,6 @@ function toggleHistoryVisibility() {
   padding: 10px 0;
   border-radius: 5px;
 
-  &__toggle-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
 
   &__content {
     margin-top: 10px;
