@@ -32,32 +32,37 @@ function handleHabitHistory() {
 </script>
 
 <template>
-  <div class="personal-habits-container">
-    <div class="content-left">
-      <h2 class="content-left__title">DASHBOARD</h2>
-      <div v-if="!habits.length" class="content-left__message">
-        <p>Vous n'avez pas encore d'habitudes enregistrées</p>
+  <div class="personal-habits">
+    <!-- Partie gauche: Liste des habitudes -->
+    <div class="personal-habits__left">
+      <h2 class="personal-habits__title">DASHBOARD</h2>
+      
+      <!-- Message quand il n'y a pas d'habitudes -->
+      <div v-if="!habits.length" class="personal-habits__message">
+        <p>Vous n'avez pas encore d'habitudes enregistrées</p>
       </div>
-      <ul class="habit-list">
-        <li v-for="habit in habits" :key="habit.id" class="habit-item">
-          <div class="habit-card">
-            <div class="habit-header-flex">
-              <div class="habit-header">
-                <h3>{{ habit.title }}</h3>
-                <p>{{ habit.description }}</p>
-              </div>
-              <div class="habit-actions">
-                <HabitTracking 
-                  :habit-id="habit.id" 
-                  @tracking:updated="handleTrackingUpdated" 
-                />
-                <DeleteHabit 
-                  :id="habit.id" 
-                  @habit:delete="handleHabitDeleted" 
-                />
-              </div>
+      
+      <!-- Liste des habitudes -->
+      <ul class="personal-habits__list">
+        <li v-for="habit in habits" :key="habit.id" class="personal-habits__item">
+          <div class="personal-habits__card">
+            <div class="personal-habits__card-flex">
+            <div class="personal-habits__card-header">
+              <h3>{{ habit.title }}</h3>
+              <p>{{ habit.description }}</p>
             </div>
-            <div class="habit-tracking">
+            <div class="personal-habits__actions">
+              <HabitTracking 
+                :habit-id="habit.id" 
+                @tracking:updated="handleTrackingUpdated" 
+              />
+              <DeleteHabit 
+                :id="habit.id" 
+                @habit:delete="handleHabitDeleted" 
+              />
+            </div>
+            </div>
+            <div class="personal-habits__tracking">
               <HabitHistory 
                 :habit-id="habit.id" 
                 :habit-title="habit.title" 
@@ -72,214 +77,133 @@ function handleHabitHistory() {
         </li>
       </ul>
     </div>
-    <div class="content-right">
+
+    <!-- Partie droite: Formulaire d'ajout d'une habitude -->
+    <div class="personal-habits__right">
       <AddHabitForm @habit:created="handleHabitUpdated" />
     </div>
   </div>
 </template>
 
 
+
+
 <style lang="scss">
 
-.personal-habits-container {
-  display: flex;
-  flex-direction: column; // Par défaut pour mobile
+.personal-habits {
+  display: grid;
+  grid-template-columns: 1fr; // Par défaut, une seule colonne pour les petits écrans
+  grid-template-rows: auto 1fr; // Les lignes sont auto-adaptatives
   height: 100vh;
-  overflow: hidden;
 
-  .content-left {
-    flex: 1;
+  // Partie gauche: liste des habitudes
+  &__left {
+    padding: 1rem;
     overflow-y: auto;
+    max-height: 100vh;
+    grid-row: 1 / 2; // La partie gauche prend la première ligne
+  }
+
+  // Partie droite: Formulaire d'ajout d'habitude
+  &__right {
     padding: 1rem;
-
-    &__title {
-      font-family: $fontTitleFamily;
-      color: orange;
-      margin-top:0;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    &__message {
-      text-align: center;
-      margin-top: 15rem;
-      font-size: 1.5rem;
-      font-family: $fontTitleFamily;
-    }
-
-    .habit-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      .habit-item {
-        margin-bottom: 1rem;
-
-        .habit-card {
-          background: white;
-          padding: 1rem;
-          border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          transition: box-shadow 0.3s ease;
-
-          &:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-          }
-
-          .habit-header-flex {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-
-            .habit-header {
-              .title {
-                font-size: 1.25rem;
-                margin: 0 0 0.5rem;
-              }
-
-              .description {
-                font-size: 0.875rem;
-                color: #555;
-                margin: 0;
-              }
-            }
-
-            .habit-actions {
-              display: flex;
-              gap: 0.5rem;
-              align-items: center;
-            }
-          }
-
-          .habit-tracking {
-            margin-top: 0.5rem;
-            gap: 0.5rem;
-          }
-        }
-      }
-    }
+    border-left: 1px solid #e5e5e5;
+    margin-top: 1rem;
+    grid-row: 2 / 3; // Partie droite prend la deuxième ligne sur petits écrans
   }
 
-  .content-right {
-    flex: 0 0 auto;
-    padding: 1rem;
-    border-top: 1px solid #e5e5e5;
-
-    .add-habit-form {
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-
-      .title {
-        font-size: 1.25rem;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-
-      .form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        .form-group {
-          .label {
-            font-size: 0.875rem;
-            color: #555;
-          }
-
-          .text-input {
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-
-            &:focus {
-              border-color: #007bff;
-              box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
-              outline: none;
-            }
-          }
-
-          .checkbox-input {
-            width: 16px;
-            height: 16px;
-            accent-color: #007bff;
-          }
-        }
-
-        .submit-button {
-          padding: 0.75rem 1rem;
-          background-color: #007bff;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          font-weight: bold;
-          cursor: pointer;
-          text-align: center;
-          transition: background-color 0.3s;
-
-          &:hover {
-            background-color: #0056b3;
-          }
-
-          &:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-          }
-        }
-      }
-    }
+  &__title {
+    font-family: $fontTitleFamily;
+    color: orange;
+    font-size: 3rem;
+    margin: 0 0 1rem;
   }
 
-  // Styles pour tablettes
-  @include medium-only() {
-    .content-left {
-      flex: 2;
-      padding: 2rem;
-
-      .title {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .habit-list .habit-item .habit-card {
-        padding: 1.5rem;
-      }
-    }
-
-    .content-right {
-      flex: 0 0 30%;
-      padding: 2rem;
-    }
+  &__message {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 15rem;
+    font-family: $fontTitleFamily;
   }
 
-  // Styles pour ordinateurs
-  @include large-up() {
+  &__actions {
+    display: grid;
  
+  }
 
-    flex-direction: row;
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-.content-left {
-  flex: 1;
-  padding: 1.5rem;
+  &__item {
+    margin-bottom: 1rem;
+  }
 
-  .title {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
+  &__card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__card-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__card-header {
+    margin-bottom: 1rem;
+  }
+
+  // Pour les écrans inférieurs à 960px
+  @include medium-down {
+    .personal-habits {
+      grid-template-columns: 1fr;  // Une seule colonne pour les petits écrans
+      grid-template-rows: auto 1fr; // Deux lignes
+    }
+
+    &__right {
+      grid-row: 2 / 3;  // La partie droite en bas sur petits écrans
+      margin-top: 1rem;
+    }
+  }
+
+  // Pour les écrans à partir de 960px
+  @include large-up {
+    .personal-habits {
+      grid-template-columns: 1fr 1fr;  // Deux colonnes pour les grands écrans
+      grid-template-rows: 1fr; // Une seule ligne pour les grands écrans
+    }
+
+    &__right {
+      grid-row: 1 / 2; // Partie droite reste en haut
+      margin-top: 0;
+      padding-top: 40%;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  // Utilisation des mixins pour la largeur des formulaires
+  @include medium-down {
+    .c-add-habit-form {
+      width: 80%;
+    }
+  }
+
+  @include small-down {
+    .c-add-habit-form {
+      width: 80%;
+    }
   }
 }
 
-.content-right {
-  flex: 0 0 40%;
-  border-top: none;
-  border-left: 1px solid #e5e5e5;
-  height: 100vh;
-  padding: 2rem;
-  padding-top: 10rem;
-}
-  }
-}
 
 </style>

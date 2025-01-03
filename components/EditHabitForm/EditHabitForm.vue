@@ -98,7 +98,7 @@ function toggleEditVisibility() {
           <div>
             <p v-if="feedbackMessage" class="edit-habit__feedback">{{ feedbackMessage }}</p>
           </div>
-          <ButtonCardHabit variant="primary" label="Valider" type="submit" />
+          <ButtonCardHabit variant="orange" label="Valider" type="submit" />
         </form>
       </div>
     </transition>

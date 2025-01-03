@@ -1,8 +1,23 @@
 $large: 960px;
 $medium: 768px;
+$small: 500px;
 
 @mixin large-up() {
     @media screen and (min-width: ($large - 1px)) {
+      @content;
+    }
+  
+}
+
+@mixin small-down() {
+    @media screen and (max-width: ($small - 1px)) {
+      @content;
+    }
+  
+}
+
+@mixin large-down() {
+    @media screen and (max-width: ($large - 1px)) {
       @content;
     }
   
@@ -13,4 +28,17 @@ $medium: 768px;
       @content;
     }
   
+}
+
+@mixin medium-down() {
+    @media screen and (max-width: ($medium - 1px)) {
+      @content;
+    }
+  
+}
+
+@mixin medium-up() {
+    @media screen and (min-width: ($medium - 1px)) {
+      @content;
+    }
 }
