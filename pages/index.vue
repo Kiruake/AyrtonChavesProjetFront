@@ -18,12 +18,22 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         text
       }
     },
-    features{
+    features {
       title,
-      text
+      text,
+      cards[] {
+        name,
+        description,
+        image {
+          asset->{
+            url
+          }
+        }
+      }
     }
   }
 `);
+
 </script>
 
 
@@ -64,14 +74,33 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
     </section>
 
 
-<section class="features">
-    <div class="features__container">
-      <div class="features__content">
+    <section class="features">
+      <div class="features__container">
+        <!-- Titre et description générales -->
         <h2 class="features__title">{{ homepage?.features.title }}</h2>
         <p class="features__description">{{ homepage?.features.text }}</p>
+
+        <!-- Liste des cards -->
+        <div class="features__cards">
+          <div 
+            v-for="(feature, index) in homepage?.features.cards" 
+            :key="index" 
+            :class="['feature-card', { 'feature-card--middle': index === Math.floor((homepage?.features.cards.length - 1) / 2) }]"
+
+          >
+            <img 
+              v-if="feature.image" 
+              :src="feature.image.asset.url" 
+              alt="Feature Image" 
+              class="feature-card__image"
+            />
+            <h3 class="feature-card__name">{{ feature.name }}</h3>
+            <p class="feature-card__description">{{ feature.description }}</p>
+          </div>
+        </div>
       </div>
-    </div>
-</section>
+    </section>
+
 
 
   </main>
@@ -166,16 +195,12 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 }
 
 .features {
-  background-color: $thirdColor;
-  padding: 4rem 0;
+  background-color: #F1F7F7;
+  padding: 4rem 2rem;
 
   &__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  &__content {
     text-align: center;
   }
 
@@ -187,9 +212,67 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 
   &__description {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
     font-family: $fontTitleFamily;
   }
+
+
+  &__cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .feature-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &__image {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    &__name {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      font-family: $fontTitleFamily;
+      color: #333;
+    }
+
+    &__description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    // Appliquez le style spécial à la carte du milieu
+    &.feature-card--middle {
+      background: #001233; // Couleur spéciale pour la carte du milieu
+
+      .feature-card__name {
+        font-size: 1.5rem;
+      margin: 0.5rem 0;
+      font-family: $fontTitleFamily;
+      color: white
+      }
+
+      .feature-card__description {
+        font-size: 1rem;
+      color: white;
+      line-height: 1.4;
+      }
+    }
+  }
 }
+
+
 
 </style>
