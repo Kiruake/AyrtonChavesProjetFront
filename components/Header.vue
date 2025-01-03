@@ -23,6 +23,9 @@ const toggleMenu = () => {
          <NuxtLink to="/app/communaute" class="header__link">Communauté</NuxtLink>
           </li>
           <li class="header__item">
+         <NuxtLink to="/blog/" class="header__link">Blog</NuxtLink>
+          </li>
+          <li class="header__item">
             <NuxtLink to="/login" ><a href="#" class="header__link">Connexion</a></NuxtLink> 
           </li>
         </ul>

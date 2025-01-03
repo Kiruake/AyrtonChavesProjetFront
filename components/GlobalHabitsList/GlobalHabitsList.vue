@@ -92,7 +92,7 @@ defineProps<{ habits: GlobalHabit[] }>();
 
 
   &__habit {
-    background-color: #F1F7F7;
+    background-color: white;
     margin-bottom: 1rem;
     padding: 1rem;
     border-radius: 8px;
