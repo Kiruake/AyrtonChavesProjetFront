@@ -6,39 +6,46 @@ const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+// Fonction pour fermer le menu mobile
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
 </script>
+
 
 <template>
   <header class="header">
     <div class="header__container">
-      <NuxtLink to="/" class="header__logo-link">
-        <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo" >
+      <NuxtLink to="/" class="header__logo-link" @click="closeMenu">
+        <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo">
       </NuxtLink>
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
           <li class="header__item">
-         <NuxtLink to="/app/dashboard" class="header__link">Dashboard</NuxtLink>
+            <NuxtLink to="/app/dashboard" class="header__link" @click="closeMenu">Dashboard</NuxtLink>
           </li>
           <li class="header__item">
-         <NuxtLink to="/app/communaute" class="header__link">Communauté</NuxtLink>
+            <NuxtLink to="/app/communaute" class="header__link" @click="closeMenu">Communauté</NuxtLink>
           </li>
           <li class="header__item">
-         <NuxtLink to="/blog/" class="header__link">Blog</NuxtLink>
+            <NuxtLink to="/blog/" class="header__link" @click="closeMenu">Blog</NuxtLink>
           </li>
           <li class="header__item">
-            <NuxtLink to="/login" ><a href="#" class="header__link">Connexion</a></NuxtLink> 
+            <NuxtLink to="/login" class="header__link" @click="closeMenu">Connexion</NuxtLink>
           </li>
         </ul>
       </nav>
       <!-- Bouton hamburger pour le mobile -->
       <button class="header__toggle" aria-label="Toggle Menu" @click="toggleMenu">
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
       </button>
     </div>
   </header>
 </template>
+
 
 <style lang="scss">
 
