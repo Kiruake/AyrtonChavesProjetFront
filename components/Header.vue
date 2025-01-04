@@ -130,14 +130,14 @@ const closeMenu = () => {
 
   &__link {
     text-decoration: none;
-    color: #F1F7F7;
+    color: $thirdColor;
     font-size: $fontSubTitleSize;
     font-weight: 700;
     transition: color 0.3s ease;
     font-family: 'Nunito', sans-serif;
 
     &:hover {
-      color: orange;
+      color: $secondaryColor;
     }
 
     @include large-up {
@@ -162,7 +162,7 @@ const closeMenu = () => {
     &-bar {
       width: 100%;
       height: 3px;
-      background-color: orange;
+      background-color: $secondaryColor;
       transition: all 0.3s ease;
       border-radius: 2px;
 

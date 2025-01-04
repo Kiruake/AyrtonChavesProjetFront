@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
     disabled?: boolean;
-    variant?: "primary" | "outline" | "orange";
+    variant?: "primary" | "outline" | "$secondaryColor";
     label?: string
     active?: boolean
     number?: number
@@ -14,7 +14,7 @@ defineProps<{
 :class="{
         'button': true,
         '-outline': variant === 'outline',
-        '-orange': variant === 'orange',
+        '-orange': variant === '$secondaryColor',
         '-disabled': disabled,
         '-active': active
     }">
@@ -46,12 +46,12 @@ defineProps<{
         }
     }
     &.-orange {
-    background: orange;
+    background: $secondaryColor;
     color: $primaryColor;
 
     &:hover {
         background-color: $primaryColor;
-        color: white;
+        color: $white;
     }
 
     
@@ -82,8 +82,8 @@ defineProps<{
     }
 
     &.-active {
-        background-color: orange;
-        color: white;
+        background-color: $secondaryColor;
+        color: $white;
     }
 
     &.-connexion {
@@ -92,12 +92,12 @@ defineProps<{
 
     &.-small {
         padding: rem(8px) rem(16px);
-        background: orange;
+        background: $secondaryColor;
         color : $primaryColor;
 
         &:hover {
             background-color: $primaryColor;
-        color: white;
+        color: $white;
         }
 
         &.-blog {

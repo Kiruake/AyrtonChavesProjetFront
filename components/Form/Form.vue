@@ -133,7 +133,7 @@ async function onSubmit(event: Event) {
   &__title {
     font-size: 24px;
     margin-bottom: 60px;
-    color: orange;
+    color: $secondaryColor;
   }
 
   &__field {
@@ -160,7 +160,7 @@ async function onSubmit(event: Event) {
     font-weight: 700;
 
     &-link {
-      color: orange;
+      color: $secondaryColor;
 
       &:hover {
         color: rgb(250, 181, 52);

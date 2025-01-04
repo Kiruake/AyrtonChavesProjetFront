@@ -48,7 +48,7 @@ defineProps<{ habits: GlobalHabit[] }>();
 
     &-text {
       font-family: $fontTitleFamily;
-      color: orange;
+      color: $secondaryColor;
       font-size: 2.1rem;
       margin-bottom: 1rem;
 
@@ -92,7 +92,7 @@ defineProps<{ habits: GlobalHabit[] }>();
 
 
   &__habit {
-    background-color: white;
+    background-color: $white;
     margin-bottom: 1rem;
     padding: 1rem;
     border-radius: 8px;
@@ -144,7 +144,7 @@ defineProps<{ habits: GlobalHabit[] }>();
   }
 
   &__btn {
-    background-color: orange;
+    background-color: $secondaryColor;
     color: #f7f7f7;
     border: none;
     font-weight: 700;

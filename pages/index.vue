@@ -255,7 +255,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
     transform: translate(-50%, -50%); 
     z-index: 2; 
     text-align: center; 
-    color: #F1F7F7;
+    color: $thirdColor;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); 
 
     .hero__title {
@@ -298,13 +298,13 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       .stats__value {
         font-size: 1.5rem; // Taille de la valeur
         font-weight: bold;
-        color: #F1F7F7;
+        color: $thirdColor;
         margin-bottom: 0.5rem;
       }
 
       .stats__text {
         font-size: 1.2rem;
-        color: #F1F7F7;
+        color: $thirdColor;
         margin-top: 5px;
       }
     }
@@ -312,7 +312,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 }
 
 .features {
-  background-color: #F1F7F7;
+  background-color: $thirdColor;
   padding: 4rem 2rem;
 
   &__container {
@@ -383,12 +383,12 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         font-size: 1.5rem;
       margin: 0.5rem 0;
       font-family: $fontTitleFamily;
-      color: white
+      color: $white
       }
 
       .feature-card__description {
         font-size: 1rem;
-      color: white;
+      color: $white;
       line-height: 1.4;
       }
     }
@@ -411,7 +411,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
     padding-top: 5rem;
     padding-bottom: 2rem;
     font-family: $fontTitleFamily;
-    color: white;
+    color: $white;
   }
 
   &__cards {
@@ -460,7 +460,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 
     &__cta {
       padding: 0.8rem 1.6rem;
-      background-color: orange;
+      background-color: $secondaryColor;
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -481,7 +481,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       }
 
       &__cta {
-        background-color: white;
+        background-color: $white;
         color: #fff;
       }
     }
@@ -514,7 +514,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 }
 
 .partners {
-  background-color: #F1F7F7;
+  background-color: $thirdColor;
   padding: 2rem 2rem;
 
   &__container {
@@ -605,7 +605,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
   &__title {
     font-size: 2.5rem;
     margin-bottom: 4rem;
-    color : white;
+    color : $white;
     padding-top: 5rem;
     font-family: $fontTitleFamily;
   }

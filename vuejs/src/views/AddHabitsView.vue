@@ -132,7 +132,7 @@ const variants = [
   z-index: 1000; /* S'assurer qu'il soit au-dessus d'autres éléments */
 
   &__btn {
-    background-color: orange;
+    background-color: $secondaryColor;
     color: #f7f7f7;
     border: none;
     font-weight: 700;

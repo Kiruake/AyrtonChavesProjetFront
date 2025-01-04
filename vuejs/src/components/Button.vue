@@ -30,18 +30,13 @@ defineProps<{
     text-decoration: none;
     cursor: pointer;
 
-    &:hover {
-        background: $primaryDarkColor;
-    }
+  
 
     &.-outline {
         background: transparent;
         color: $primaryColor;
 
-        &:hover {
-            color: $primaryDarkColor;
-            border-color: $primaryDarkColor;
-        }
+   
 
         &.-disabled {
             background: transparent;

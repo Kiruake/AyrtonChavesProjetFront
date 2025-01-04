@@ -114,7 +114,7 @@ function handleHabitHistory() {
 
   &__title {
     font-family: $fontTitleFamily;
-    color: orange;
+    color: $secondaryColor;
     font-size: 3rem;
     margin: 0 0 1rem;
   }
@@ -142,7 +142,7 @@ function handleHabitHistory() {
   }
 
   &__card {
-    background: white;
+    background: $white;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
