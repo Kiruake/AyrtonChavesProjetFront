@@ -65,7 +65,7 @@ async function addHabit() {
         <label class="c-add-habit-form__form-group__label" for="is_global">Habitude Globale</label>
         <input class="c-add-habit-form__form-group__input--checkbox" id="is_global" v-model="habitIsGlobal" type="checkbox">
       </div>
-      <ButtonCardHabit variant="orange" label="Ajouter" type="submit" />
+      <ButtonCardHabit variant="$secondaryColor" label="Ajouter" type="submit" />
     </form>
   </div>
 </template>

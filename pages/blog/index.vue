@@ -119,7 +119,7 @@ function onCategoryClick(category: SanityDocument) {
   text-align: center;
   margin-bottom: 3rem;
   font-size: 2.5rem;
-  color: orange;
+  color: $secondaryColor;
   font-family: $fontTitleFamily;
 }
 

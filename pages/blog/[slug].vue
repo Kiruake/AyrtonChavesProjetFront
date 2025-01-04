@@ -58,7 +58,7 @@ useSeoMeta({
 
 .blog {
     line-height: 1.6;
-    background-color: #F1F7F7;
+    background-color: $thirdColor;
     padding: 2rem;
     padding-bottom: 7rem;
     border-radius: 12px;
@@ -71,13 +71,13 @@ useSeoMeta({
         max-width: 90%;
         border-radius: 6px;
         margin: 0 auto;
-        background-color: white;
+        background-color: $white;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     &__title {
         font-family: $fontTitleFamily;
-        color: orange;
+        color: $secondaryColor;
         text-align: center;
         margin-bottom: 1rem;
         font-size: clamp(2rem, 4vw, 3rem); /* Adjust size for responsive */

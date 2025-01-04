@@ -98,22 +98,22 @@
 
   &__link {
     text-decoration: none;
-    color: #F1F7F7;
+    color: $thirdColor;
     font-size: 1rem;
     font-weight: 700;
     transition: color 0.3s ease;
     font-family: 'Nunito', sans-serif;
 
     &:hover {
-      color: orange;
+      color: $secondaryColor;
     }
   }
 
   &__info {
     text-align: center;
-    color: #F1F7F7;
+    color: $thirdColor;
     margin-top: 3rem;
-    border-top: 1px solid white;
+    border-top: 1px solid $white;
 
     &__copyright {
       margin: 0.5rem 0;
