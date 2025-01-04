@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+definePageMeta({
+  layout: 'minimal'
+})
+
 </script>
 
 <template>
@@ -8,6 +12,10 @@
   <div class="homepage"/>
 
 <Form v-bind="{action: 'login'}"  :title="'Connexion'"/>
+
+<video class="homepage__video" autoplay loop muted>
+  <source  src="/videos/video_login.mp4" type="video/mp4">
+</video>
 
 
   </main>

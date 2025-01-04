@@ -4,6 +4,7 @@
 
 <template>
     <div class="l-minimal">
+    <Header />
     <slot />
     </div>
 </template>
