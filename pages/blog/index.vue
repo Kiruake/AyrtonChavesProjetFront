@@ -206,7 +206,7 @@ function onCategoryClick(category: SanityDocument) {
     justify-content: center;
     gap: 0.5rem;
     margin-top: 5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 7rem;
   }
 }
 

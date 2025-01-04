@@ -131,6 +131,7 @@ defineProps<{ habits: GlobalHabit[] }>();
     justify-content: center;
     display: flex;
     margin-top: 5rem;
+    margin-bottom: 7rem
   }
 
   @include medium-only {
