@@ -60,6 +60,7 @@ useSeoMeta({
     line-height: 1.6;
     background-color: #F1F7F7;
     padding: 2rem;
+    padding-bottom: 7rem;
     border-radius: 12px;
 
     &__slug {

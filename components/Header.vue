@@ -18,7 +18,7 @@ const closeMenu = () => {
   <header class="header">
     <div class="header__container">
       <NuxtLink to="/" class="header__logo-link" @click="closeMenu">
-        <img class="header__logo" src="/images/LogoTrackerHeader.svg" alt="Logo">
+        <img class="header__logo" src="/images/LogoTracker.svg" alt="Logo">
       </NuxtLink>
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
@@ -162,7 +162,7 @@ const closeMenu = () => {
     &-bar {
       width: 100%;
       height: 3px;
-      background-color: $secondaryColor;
+      background-color: orange;
       transition: all 0.3s ease;
       border-radius: 2px;
 
