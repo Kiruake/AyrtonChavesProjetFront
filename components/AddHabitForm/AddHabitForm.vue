@@ -55,15 +55,15 @@ async function addHabit() {
     <form class="c-add-habit-form__form" @submit.prevent="addHabit">
       <div class="c-add-habit-form__form-group">
         <label class="c-add-habit-form__form-group__label" for="title">Titre</label>
-        <input class="c-add-habit-form__form-group__input--text" id="title" v-model="habitTitle" type="text" placeholder="Entrez le titre de la Habitude">
+        <input id="title" v-model="habitTitle" class="c-add-habit-form__form-group__input--text" type="text" placeholder="Entrez le titre de la Habitude">
       </div>
       <div class="c-add-habit-form__form-group">
         <label class="c-add-habit-form__form-group__label" for="description">Description</label>
-        <input class="c-add-habit-form__form-group__input--text" id="description" v-model="habitDescription" type="text" placeholder="Entrez la description de la Habitude">
+        <input id="description" v-model="habitDescription" class="c-add-habit-form__form-group__input--text" type="text" placeholder="Entrez la description de la Habitude">
       </div>
       <div class="c-add-habit-form__form-group">
         <label class="c-add-habit-form__form-group__label" for="is_global">Habitude Globale</label>
-        <input class="c-add-habit-form__form-group__input--checkbox" id="is_global" v-model="habitIsGlobal" type="checkbox">
+        <input id="is_global" v-model="habitIsGlobal" class="c-add-habit-form__form-group__input--checkbox" type="checkbox">
       </div>
       <ButtonCardHabit variant="$secondaryColor" label="Ajouter" type="submit" />
     </form>

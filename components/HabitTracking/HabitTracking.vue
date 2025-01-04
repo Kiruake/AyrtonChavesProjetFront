@@ -35,7 +35,7 @@ async function trackHabit() {
     }
 
     const result = await response.json();
-    trackingMessage.value = `Suivi enregistré pour le ${result.date}`;
+    trackingMessage.value = `Tracking recorded for the ${result.date}`;
     emit('tracking:updated', result);
   } catch (error) {
     trackingMessage.value = 'Erreur réseau ou interne';
@@ -46,7 +46,7 @@ async function trackHabit() {
 
 <template>
   <div>
-    <ButtonCardHabit variant="green" label="Enregistrer" @click="trackHabit"/>
+    <ButtonCardHabit variant="green" label="Check" @click="trackHabit"/>
   </div>
 </template>
 

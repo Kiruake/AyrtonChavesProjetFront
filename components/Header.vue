@@ -49,9 +49,9 @@ const closeMenu = () => {
       </nav>
       <!-- Bouton hamburger pour le mobile -->
       <button class="header__toggle" aria-label="Toggle Menu" @click="toggleMenu">
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
-        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"></span>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
+        <span :class="{ 'header__toggle-bar--active': isMenuOpen }" class="header__toggle-bar"/>
       </button>
     </div>
   </header>

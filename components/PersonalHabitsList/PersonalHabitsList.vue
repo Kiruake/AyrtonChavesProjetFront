@@ -42,7 +42,7 @@ function handleHabitHistory() {
     <!-- Partie gauche: Liste des habitudes -->
     <div class="personal-habits__left">
       <h2 class="personal-habits__title">DASHBOARD</h2>
-      <Button @click="logout" class="button -red" label="Déconnexion" />
+      <Button class="button -red" label="Logout" @click="logout" />
       
       <!-- Message quand il n'y a pas d'habitudes -->
       <div v-if="!habits.length" class="personal-habits__message">
