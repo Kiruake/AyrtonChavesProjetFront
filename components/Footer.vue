@@ -31,7 +31,7 @@
 
     <!-- Footer info section -->
     <div class="footer__info">
-      <p class="footer__copyright">&copy; 2025, Tous droits réservés.</p>
+      <p class="footer__info__copyright">&copy; 2025, Tous droits réservés.</p>
     </div>
   </footer>
 </template>
