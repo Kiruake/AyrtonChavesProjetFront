@@ -1,8 +1,7 @@
 <script setup lang="ts">
-
 import type { SanityDocument } from "@sanity/client";
 
-// Récupérer la page d'accueil avec les abonnements Premium et VIP
+// Récupérer la page d'accueil avec les abonnements Premium et VIP, ainsi que les partenaires
 const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
   *[_type == "homepage" && defined(hero)][0] {
     title,
@@ -32,7 +31,6 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         }
       }
     },
-    // Correction ici, utilisation de abonnements[] au lieu de abonnement[]
     abonnements[] {
       name,
       price,
@@ -44,9 +42,19 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
           url
         }
       }
+    },
+    partenaires {
+      title,
+      description,
+      images[] {
+        asset->{
+          url
+        }
+      }
     }
   }
 `);
+
 
 </script>
 
@@ -145,6 +153,35 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
         </div>
       </div>
     </section>
+
+
+     <!-- Partners Section -->
+     <section class="partners">
+  <div class="partners__container">
+    <h2 class="partners__title">{{ homepage?.partenaires.title }}</h2>
+
+    <div class="partners__content">
+      <!-- 2x2 Grid of Partner Logos -->
+      <div class="partners__images">
+        <div v-for="(image, index) in homepage?.partenaires.images" :key="index" class="partner-card">
+          <img 
+            v-if="image.asset" 
+            :src="image.asset.url" 
+            alt="Partner Logo" 
+            class="partner-card__logo"
+          />
+        </div>
+      </div>
+
+      <!-- Description to the right -->
+      <div class="partners__description-right">
+        <p class="partners__description">{{ homepage?.partenaires.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 
   </main>
@@ -284,6 +321,11 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 1rem;
+
+      @include large-down {
+        width: 60%;
+      }
+
     }
 
     &__name {
@@ -347,7 +389,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
 
   .subscription-card {
     background-color: #fff;
-    border-radius: 60px;
+    border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     text-align: center;
@@ -416,6 +458,10 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       color: #333;
       margin-left: -60px;
 
+      @include medium-down {
+        margin-left: 0px;
+      }
+
       &__name, &__description {
         color: #333;
       }
@@ -432,5 +478,86 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
     }
   }
 }
+
+.partners {
+  background-color: #F1F7F7;
+  padding: 2rem 2rem;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    font-family: $fontTitleFamily;
+  }
+
+  &__description {
+    font-size: 1.3rem;
+    line-height: 1.7;
+
+    @include small-down {
+        font-size: 1rem;
+      }
+  }
+
+  &__content {
+    display: flex;
+    gap: 5rem;
+    justify-content: space-evenly;
+    align-items: center;
+
+@include medium-down {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+  }
+
+  &__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include medium-down {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  .partner-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__logo {
+      max-width: 110px; /* Redimensionner les images */
+      height: auto;
+      object-fit: contain;
+
+    @include small-down {
+        max-width: 80px; /* Redimensionner les images */
+      }
+
+    }
+  }
+
+  &__description-right {
+    flex: 1;
+    max-width: 600px; /* Limiter la largeur de la description */
+    text-align: left;
+    font-size: 1rem;
+    color: #333;
+
+    @include medium-down {
+        text-align: justify;
+      }
+  }
+}
+
 
 </style>
