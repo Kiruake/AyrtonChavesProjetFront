@@ -59,16 +59,16 @@ function toggleHistoryVisibility() {
 
 <template>
   <div class="tracking-history">
-    <ButtonCardHabit variant="$secondaryColor" label="Historique"  @click="toggleHistoryVisibility">
+    <ButtonCardHabit variant="$secondaryColor" label="History"  @click="toggleHistoryVisibility">
       {{ isHistoryVisible ? 'Masquer l\'historique' : 'Voir l\'historique' }}
     </ButtonCardHabit>
     <div v-if="isHistoryVisible" class="tracking-history__content">
       <ul v-if="trackingHistory.length" class="tracking-history__list">
         <li v-for="record in trackingHistory" :key="record.date" class="tracking-history__item">
-          Habitude effectué le {{ new Date(record.date).toLocaleDateString() }}
+          Habits done the {{ new Date(record.date).toLocaleDateString() }}
         </li>
       </ul>
-      <p v-else class="tracking-history__message">Aucun suivi enregistré pour cette habitude.</p>
+      <p v-else class="tracking-history__message">No tracking recorded for this habit.</p>
       <p v-if="errorMessage" class="tracking-history__error">{{ errorMessage }}</p>
     </div>
   </div>

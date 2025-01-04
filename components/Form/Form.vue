@@ -81,7 +81,7 @@ async function onSubmit(event: Event) {
 <template>
   <form class="login" @submit="onSubmit">
     <!-- Utilisation de l'alias /_nuxt pour les assets statiques dans Nuxt -->
-    <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo" />
+    <img src="/images/LogoTracker.svg" alt="Logo" class="login__logo" >
     <h2 v-if="showTitle" class="login__title">{{ title }}</h2>
     <div class="login__field">
       <input
@@ -91,7 +91,7 @@ async function onSubmit(event: Event) {
         class="login__input login__input--text"
         :placeholder="usernamePlaceholder"
         aria-label="Nom d’utilisateur"
-      />
+      >
     </div>
     <div class="login__field">
       <input
@@ -101,7 +101,7 @@ async function onSubmit(event: Event) {
         class="login__input login__input--password"
         :placeholder="passwordPlaceholder"
         aria-label="Mot de passe"
-      />
+      >
     </div>
     <div class="login__actions">
       <Button type="submit" class="button -orange" :label="buttonLabel" />

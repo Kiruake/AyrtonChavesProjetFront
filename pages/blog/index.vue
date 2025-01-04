@@ -93,7 +93,7 @@ function onCategoryClick(category: SanityDocument) {
               :src="urlFor(post.image)?.url()"
               alt="Post image"
               class="c-blog__card-img"
-            />
+            >
             <div v-else class="c-blog__card-no-image">Pas d'image</div>
           </div>
           <div class="c-blog__card-content">

@@ -129,7 +129,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
               :src="feature.image.asset.url" 
               alt="Feature Image" 
               class="feature-card__image"
-            />
+            >
             <h3 class="feature-card__name">{{ feature.name }}</h3>
             <p class="feature-card__description">{{ feature.description }}</p>
           </div>
@@ -141,7 +141,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
     <section class="subscriptions">
       <div class="subscriptions__container">
         <!-- Titre de la section -->
-        <h2 class="subscriptions__title">Nos Abonnements</h2>
+        <h2 class="subscriptions__title">Our Subscriptions</h2>
 
         <!-- Liste des cartes d'abonnement -->
         <div class="subscriptions__cards">
@@ -156,7 +156,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
               :src="subscription.image.asset.url" 
               alt="Subscription Image" 
               class="subscription-card__image"
-            />
+            >
             <h3 class="subscription-card__name">{{ subscription.name }}</h3>
             <p class="subscription-card__price">{{ subscription.price }}€</p>
             <p class="subscription-card__description">{{ subscription.description }}</p>
@@ -181,7 +181,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
             :src="image.asset.url" 
             alt="Partner Logo" 
             class="partner-card__logo"
-          />
+          >
         </div>
       </div>
 
@@ -204,7 +204,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       :src="review.profilePicture.asset.url" 
       alt="Photo de {{ review.name }}" 
       class="review-card__image"
-    />
+    >
     <h3 class="review-card__name">{{ review.name }}</h3>
   </div>
   <p class="review-card__comment">{{ review.comment }}</p>

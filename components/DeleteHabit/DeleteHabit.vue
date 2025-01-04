@@ -47,7 +47,7 @@ async function deleteHabit() {
 
 <template>
   <div>
-    <ButtonCardHabit variant="red" label="Supprimer" @click="deleteHabit"/>
+    <ButtonCardHabit variant="red" label="Delete" @click="deleteHabit"/>
   </div>
 </template>
 
