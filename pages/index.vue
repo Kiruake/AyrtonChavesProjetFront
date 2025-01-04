@@ -2,6 +2,7 @@
 
 import type { SanityDocument } from "@sanity/client";
 
+// Récupérer la page d'accueil avec les abonnements Premium et VIP
 const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
   *[_type == "homepage" && defined(hero)][0] {
     title,
@@ -30,11 +31,26 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
           }
         }
       }
+    },
+    // Correction ici, utilisation de abonnements[] au lieu de abonnement[]
+    abonnements[] {
+      name,
+      price,
+      description,
+      ctaText,
+      type,
+      image {
+        asset->{
+          url
+        }
+      }
     }
   }
 `);
 
 </script>
+
+
 
 
 <template>
@@ -101,10 +117,40 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       </div>
     </section>
 
+   <!-- Section Abonnements -->
+    <section class="subscriptions">
+      <div class="subscriptions__container">
+        <!-- Titre de la section -->
+        <h2 class="subscriptions__title">Nos Abonnements</h2>
+
+        <!-- Liste des cartes d'abonnement -->
+        <div class="subscriptions__cards">
+                  <div 
+          v-for="(subscription, index) in homepage?.abonnements" 
+          :key="index" 
+          :class="['subscription-card', subscription.type === 'premium' ? 'subscription-card--premium' : 'subscription-card--vip']"
+        >
+
+            <img 
+              v-if="subscription.image" 
+              :src="subscription.image.asset.url" 
+              alt="Subscription Image" 
+              class="subscription-card__image"
+            />
+            <h3 class="subscription-card__name">{{ subscription.name }}</h3>
+            <p class="subscription-card__price">{{ subscription.price }}€</p>
+            <p class="subscription-card__description">{{ subscription.description }}</p>
+            <button class="subscription-card__cta">{{ subscription.ctaText }}</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
   </main>
 </template>
+
+
 
 
 
@@ -273,6 +319,118 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
   }
 }
 
+.subscriptions {
+  background-color: $secondaryColor;
+  padding: 0rem 2rem 5rem 2rem;
 
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    font-family: $fontTitleFamily;
+    color: white;
+  }
+
+  &__cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .subscription-card {
+    background-color: #fff;
+    border-radius: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &__image {
+      width: 50%;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    &__name {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      font-family: $fontTitleFamily;
+      color: #333;
+    }
+
+    &__price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin: 0.5rem 0;
+    }
+
+    &__description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    &__cta {
+      padding: 0.8rem 1.6rem;
+      background-color: orange;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+    }
+
+    // Appliquez le style bleu pour la carte Premium
+    &--premium {
+      background-color: $primaryColor;
+      color: #fff;
+    
+
+      &__name, &__description {
+        color: #fff;
+      }
+
+      &__cta {
+        background-color: white;
+        color: #fff;
+      }
+    }
+
+
+    &--vip {
+      background-color: #fff;
+      color: #333;
+      margin-left: -60px;
+
+      &__name, &__description {
+        color: #333;
+      }
+
+      &__cta {
+        background-color: #28a745;
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
 
 </style>
