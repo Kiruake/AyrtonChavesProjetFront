@@ -51,7 +51,19 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
           url
         }
       }
+    },
+    reviews {
+  title,
+  cards[] {
+    name,
+    comment,
+    profilePicture {
+      asset->{
+        url
+      }
     }
+  }
+}
   }
 `);
 
@@ -179,6 +191,28 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       </div>
     </div>
   </div>
+</section>
+
+<section class="reviews">
+  <div class="reviews__container">
+    <h2 class="reviews__title">{{ homepage?.reviews?.title || 'Avis Clients' }}</h2>
+    <div v-if="homepage?.reviews?.cards?.length" class="reviews__cards">
+      <div v-for="(review, index) in homepage.reviews.cards" :key="index" class="review-card">
+  <div class="review-card__header">
+    <img 
+      v-if="review.profilePicture?.asset?.url" 
+      :src="review.profilePicture.asset.url" 
+      alt="Photo de {{ review.name }}" 
+      class="review-card__image"
+    />
+    <h3 class="review-card__name">{{ review.name }}</h3>
+  </div>
+  <p class="review-card__comment">{{ review.comment }}</p>
+</div>
+
+      </div>
+      <p v-else>Aucun avis disponible pour le moment.</p>
+    </div>
 </section>
 
 
@@ -558,6 +592,75 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(groq`
       }
   }
 }
+
+.reviews {
+
+  &__container {
+    margin: 0 auto;
+    text-align: center;
+    background-color: $primaryColor;
+    padding-bottom: 7rem;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color : white;
+    padding-top: 5rem;
+    font-family: $fontTitleFamily;
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .review-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .review-card__image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 0.5rem;
+      }
+
+      .review-card__name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        margin-top: -0.5rem;
+      }
+    }
+
+    &__comment {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+      text-align: center;
+      margin-top: -1rem;
+    }
+  }
+}
+
+
 
 
 </style>
