@@ -13,6 +13,12 @@ const emit = defineEmits([
   'tracking:history'
 ]);
 
+const logout = () => {
+  const cookieJwt = useCookie('api_tracking_jwt');
+  cookieJwt.value = null; // Supprimer le cookie
+  const router = useRouter();
+  router.push('/login'); // Rediriger vers la page de connexion
+};
 
 function handleHabitDeleted(habitId: PersonalHabit['id']) {
   emit('habit:deleted', habitId);
@@ -36,6 +42,7 @@ function handleHabitHistory() {
     <!-- Partie gauche: Liste des habitudes -->
     <div class="personal-habits__left">
       <h2 class="personal-habits__title">DASHBOARD</h2>
+      <Button @click="logout" class="button -red" label="Déconnexion" />
       
       <!-- Message quand il n'y a pas d'habitudes -->
       <div v-if="!habits.length" class="personal-habits__message">

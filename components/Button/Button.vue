@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
     disabled?: boolean;
-    variant?: "primary" | "outline" | "$secondaryColor";
+    variant?: "primary" | "outline" | "$secondaryColor" | "red";
     label?: string
     active?: boolean
     number?: number
@@ -15,6 +15,7 @@ defineProps<{
         'button': true,
         '-outline': variant === 'outline',
         '-orange': variant === '$secondaryColor',
+        '-red': variant === 'red',
         '-disabled': disabled,
         '-active': active
     }">
@@ -45,6 +46,18 @@ defineProps<{
             color: $primaryColor;
         }
     }
+
+        &.-red {
+            background: red;
+            color: $white;
+            margin-bottom: 2rem;
+
+            &:hover {
+                background-color: rgb(195, 6, 6);
+                color: $white;
+            }
+        }
+
     &.-orange {
     background: $secondaryColor;
     color: $primaryColor;

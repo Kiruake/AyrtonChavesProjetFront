@@ -1,6 +1,12 @@
 <script setup lang="ts">
 
+// Vérifier si le cookie 'api_tracking_jwt' existe
+const cookieJwt = useCookie('api_tracking_jwt');
+
+// Si le cookie JWT existe, l'utilisateur est connecté
+const isAuthenticated = computed(() => !!cookieJwt.value);
 </script>
+
 
 <template>
   <footer class="footer">
@@ -14,15 +20,16 @@
       <nav class="footer__nav">
         <ul class="footer__list">
           <li class="footer__item">
-            <NuxtLink to="/app/dashboard" class="footer__link">Dashboard</NuxtLink>
+            <NuxtLink v-if="isAuthenticated"  to="/app/dashboard" class="footer__link">Dashboard</NuxtLink>
           </li>
-          <li class="footer__item">
+          <li v-if="isAuthenticated"  class="footer__item">
             <NuxtLink to="/app/communaute" class="footer__link">Communauté</NuxtLink>
           </li>
           <li class="footer__item">
             <NuxtLink to="/blog/" class="footer__link">Blog</NuxtLink>
           </li>
-          <li class="footer__item">
+          <!-- Afficher Connexion uniquement si l'utilisateur n'est pas connecté -->
+          <li v-if="!isAuthenticated" class="footer__item">
             <NuxtLink to="/login" class="footer__link">Connexion</NuxtLink>
           </li>
         </ul>
@@ -35,6 +42,7 @@
     </div>
   </footer>
 </template>
+
 
 <style lang="scss">
 .footer {

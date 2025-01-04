@@ -2,6 +2,12 @@
 // État pour le menu mobile
 const isMenuOpen = ref(false);
 
+// Vérifier si le cookie 'api_tracking_jwt' existe
+const cookieJwt = useCookie('api_tracking_jwt');
+
+// Si le cookie JWT existe, l'utilisateur est connecté
+const isAuthenticated = computed(() => !!cookieJwt.value);
+
 // Fonction pour basculer le menu mobile
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -14,6 +20,7 @@ const closeMenu = () => {
 </script>
 
 
+
 <template>
   <header class="header">
     <div class="header__container">
@@ -22,16 +29,20 @@ const closeMenu = () => {
       </NuxtLink>
       <nav class="header__nav" :class="{ 'header__nav--open': isMenuOpen }">
         <ul class="header__list">
-          <li class="header__item">
+          <!-- Afficher Dashboard uniquement si l'utilisateur est connecté -->
+          <li v-if="isAuthenticated" class="header__item">
             <NuxtLink to="/app/dashboard" class="header__link" @click="closeMenu">Dashboard</NuxtLink>
           </li>
-          <li class="header__item">
+          <!-- Afficher Communauté uniquement si l'utilisateur est connecté -->
+          <li v-if="isAuthenticated" class="header__item">
             <NuxtLink to="/app/communaute" class="header__link" @click="closeMenu">Communauté</NuxtLink>
           </li>
+          <!-- Autres liens visibles pour tous -->
           <li class="header__item">
             <NuxtLink to="/blog/" class="header__link" @click="closeMenu">Blog</NuxtLink>
           </li>
-          <li class="header__item">
+          <!-- Lien Connexion visible uniquement si l'utilisateur n'est pas connecté -->
+          <li v-if="!isAuthenticated" class="header__item">
             <NuxtLink to="/login" class="header__link" @click="closeMenu">Connexion</NuxtLink>
           </li>
         </ul>
@@ -45,6 +56,7 @@ const closeMenu = () => {
     </div>
   </header>
 </template>
+
 
 
 <style lang="scss">
